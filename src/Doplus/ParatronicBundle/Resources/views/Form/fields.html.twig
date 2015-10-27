@@ -1,0 +1,25 @@
+{# src/My/UtilsBundle/Resources/views/Form/fields.html.twig #}
+ 
+{% block gmap_address_widget %}
+<div id="{{ id }}_gmap_address_widget"></div>
+<div id="{{ id }}_input">{{ block('form_widget') }}</div>
+<div id="{{ id }}_map" class="gmap_address_map"></div>
+ 
+<script type="text/javascript">
+$(function() {
+            var addresspickerMap = $("#{{ form.adresse.vars.id }}").addresspicker({
+                regionBias: "fr",
+                elements: {
+                    map: "#{{ id }}_map",
+                    locality: '#{{ form.ville.vars.id }}',
+                    lat:      "#{{ form.coordonneesGpsLat.vars.id }}",
+                    lng:      "#{{ form.coordonneesGpsLng.vars.id }}"
+                }
+            });
+            console.log(addresspickerMap.elements);
+            var gmarker = addresspickerMap.addresspicker("marker");
+            gmarker.setVisible(true);
+            addresspickerMap.addresspicker("updatePosition");
+    });
+</script>
+{% endblock %}

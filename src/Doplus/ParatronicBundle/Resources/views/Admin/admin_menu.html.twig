@@ -1,0 +1,135 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <div id="search-clients-form">
+                    {{ form_start(formClientSearch, {'attr': {'class': 'form-horizontal', 'name': 'formClientSearch'}}) }}
+                    {{ form_errors(formClientSearch) }}
+                        <div class="colx2">
+                                <div class="colx3">
+                                        <div class="margin">
+                                            {{ form_errors(formClientSearch.entite) }}
+                                            {{ form_widget(formClientSearch.entite, {'id': 'search-client-nom', 'attr': {'placeholder': 'Rechercher une entité'}}) }}
+                                        </div>
+                                </div>
+                                <div class="colx3">
+                                        <div class="margin">
+                                            {{ form_errors(formClientSearch.cp) }}
+                                            {{ form_widget(formClientSearch.cp, {'id': 'search-client-cp', 'attr': {'placeholder': 'Rechercher par code postal'}}) }}
+                                        </div>
+                                </div>
+                                <div class="colx3">
+                                        <div class="margin">
+                                            {{ form_errors(formClientSearch.ville) }}
+                                            {{ form_widget(formClientSearch.ville, {'id': 'search-client-ville', 'attr': {'placeholder': 'Rechercher par ville'}}) }}
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="container-submit">
+                                <div class="margin">
+                                        <input type="submit" id="search-client-submit" class="form-submit" name="search-client-submit" value="OK">
+                                </div>
+                        </div>
+                        <div class="clear"></div>
+                {{ form_end(formClientSearch) }}
+        </div>
+        <!-- / CLIENTS SEARCH -->
+                <!-- / CLIENTS INFOS -->
+        <div id="clients-infos">
+
+                <h1>Clients</h1>
+
+                <!-- CLIENTS EDIT 1 -->
+                <div id="clients-edit-form1" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_home_index') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout client" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_client') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
+                                                </div>
+                                        </div>
+                                                                                
+                                </div>
+                                <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 1 -->
+
+                <!-- CLIENT INFOS USERS -->
+                <div id="liste-clients-infos">
+                        {% for client in clients %}
+                        <div class="infos-client_entity" id="elementLine">
+                                <div class="client_entity entity colx7"><div class="margin"><strong>Entité</strong><br /><a href="{{ path('doplus_paratronic_admin_edit_client', {'id': client.id}) }}"><strong>{{ client.raisonSociale }}</strong></a></div></div>
+                                <div class="client_entity code-postal colx7"><div class="margin">Code postal<br />{% if client.cp %}<strong>{{ client.cp }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                <div class="client_entity ville colx7"><div class="margin">Ville<br />{% if client.ville %}<strong>{{ client.ville }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                <div class="client_entity nb-users colx7"><div class="margin">Utilisateurs<br /><a href="{{ path('doplus_paratronic_admin_user_menu', {'id': client.id}) }}"><strong>{{ client.nbUtilisateurs }}</strong></a></div></div>
+                                <div class="client_entity nb-stations colx7"><div class="margin">Stations<br /><a href="{{ path('doplus_paratronic_admin_station_menu', {'id': client.id}) }}"><strong>{{ client.nbStations }}</strong></a></div></div>
+                                <div class="client_entity nb-stations colx7"><div class="margin">Paramètres<br /><a href="{{ path('doplus_paratronic_parametre_menu', {'id': client.id}) }}"><strong>Editer</strong></a></div></div>
+                                <div class="client_entity delete colx7">
+                                        <div class="margin">
+                                                <a href="{{ path('doplus_paratronic_admin_delete_client', {'id': client.id}) }}"><strong>Supprimer</strong></a>
+                                                <form action="" method="post" accept-charset="UTF-8">
+                                                        <!-- jquery ui -->
+                                                        <input type="checkbox" id="entity-suppr2" class="button-jqui checkSuppr" value="2"><label for="entity-suppr2">&nbsp;</label>
+                                                </form>
+                                        </div>
+                                </div>
+                                <div class="clear"></div>
+                        </div>
+                        {% endfor %}
+
+                </div>
+                <!-- / CLIENT INFOS USERS -->
+
+                <!-- CLIENTS EDIT 2 -->
+                <div id="clients-edit-form2" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_home_index') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout client" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_client') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="sep colx3">&nbsp;</div>
+                                                                <div class="colx6">
+                                        <div class="margin">
+                                                <input type="button" value="Suppr. sélection" onclick="javascript:supprSelection('client');">
+                                        </div>
+                                </div>
+                                <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 2 -->
+        </div>
+{% endblock %}

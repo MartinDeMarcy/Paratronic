@@ -1,0 +1,46 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <div id="user-infos">
+            <h1>Paramètre d'alerte</h1>
+            {{ form_start(formAlerte, {'id': "form-alerte-action", 'attr': {'class': 'form-horizontal'}}) }}
+            {{ form_errors(formAlerte) }}
+            <div id="user-infos-form" class="col2-3">
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_errors(formAlerte.intervalleRelance) }}
+                                        {{ form_label(formAlerte.intervalleRelance, "Temps d'intervalle de relance (en minutes)") }}
+                                        {{ form_widget(formAlerte.intervalleRelance, {'id': 'intervalleRelance'}) }}
+                                    </div>
+                            </div>
+
+                            <p>
+                                <input type="hidden" name="client_id" value="3" />
+                                <input type="hidden" name="id" value="1" />
+                            </p>
+                            <div class="clear"></div>
+                    </div>
+
+                    <div class="clear"></div>
+                    <div id="user-edit-form">
+                                    <div class="colx2">
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Annuler" onclick="history.go(-1);">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="valider_alerte" value="Valider">
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="clear"></div>
+
+                    </div>	
+
+    </div>
+{{ form_end(formAlerte) }}
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <div id="user-infos">
+            <h1>{% if station.nom %}Modifier {% else %}Ajouter {% endif %}station</h1>
+            {% if form_errors(formStation.nom) != NULL or form_errors(formStation.codeHydrologique) != NULL or form_errors(formStation.image) != NULL %}
+                <section id="messages" class="error">
+                        <div class="margin">
+                                <p>{{ form_errors(formStation.nom) }}</p>
+                                <p>{{ form_errors(formStation.codeHydrologique) }}</p>
+                                <p>{{ form_errors(formStation.image) }}</p>
+                        </div>				
+                        <div class="clear"></div>
+                </section>
+            {% endif %}
+                    {{ form_start(formStation, {'id': "form-station-action", 'attr': {'class': 'form-horizontal'}}) }}
+                    <div id="user-infos-form" class="col2-3">
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.nom, "Nom *") }}
+                                        {{ form_widget(formStation.nom, {'id': 'nom'}) }}
+                                    </div>
+                            </div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.image, "Photo (520 x 780)") }}
+                                        {{ form_widget(formStation.image, {'id': 'image'}) }}
+                                    </div>
+                            </div>
+                            <!-- ATTENTION - respecter les classes colx3 et col-picture pour la zone photo existante -->
+                            <div class="colx3 col-picture">
+                                <div class="margin">
+                                    {% if station.pathImage %}
+                                        <label for="user-edit-photo">Photo existante</label>
+                                        <div class="user-infos-picture">
+                                                <img src="{{ asset(station.getWebPath()) }}" height="70" />
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- ATTENTION - toujours ajouter un clear après la photo et redémarrer l'imprication normalement -->
+                        <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.adresse, "Adresse") }}
+                                        {{ form_widget(formStation.adresse, {'id': 'adresse'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.cp, "Code Postal") }}
+                                        {{ form_widget(formStation.cp, {'id': 'cp'}) }}
+                                    </div>
+                            </div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.ville, "Ville") }}
+                                        {{ form_widget(formStation.ville, {'id': 'ville'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="colx2">
+                                 <div class="margin">
+                                        {{ form_label(formStation.coordonneesGpsLat, "Coordonnées GPS latitude") }}
+                                        {{ form_widget(formStation.coordonneesGpsLat, {'id': 'coordonneesGpsLat'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.coordonneesGpsLng, "Coordonnées GPS longitude") }}
+                                        {{ form_widget(formStation.coordonneesGpsLng, {'id': 'coordonneesGpsLng'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.codeHydrologique, "Code hydrologique *") }}
+                                        {{ form_widget(formStation.codeHydrologique, {'id': 'codeHydrologique'}) }}
+                                    </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.description, "Description") }}
+                                        {{ form_widget(formStation.description, {'id': 'description'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.client, "Client") }}
+                                        {{ form_widget(formStation.client, {'id': 'client', 'attr': {'class': 'selectmenu-jqui'}}) }}
+                                    </div>
+                            </div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formStation.etat, "Etat") }}
+                                        <div class="checkbox">
+                                            Actif{{ form_widget(formStation.etat, {'id': 'etat'}) }}
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                            </div>
+                            <p>
+                                <input type="hidden" name="id" value="" />
+                            </p>
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        <a href="#null" onclick="javascript:getCoord();">Cliquez ici pour récupérer les coordonnées GPS</a>
+                                    </div>
+                            </div>
+
+            </div>
+
+                   <div class="clear"></div>
+                    <div id="user-edit-form">
+                                    <div class="colx2">
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Annuler" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}';">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="valider_station" value="Valider">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="suppr_station" value="Supprimer">
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="clear"></div>
+
+                    </div>	
+
+    </div>
+{{ form_end(formStation) }}
+{% endblock %}

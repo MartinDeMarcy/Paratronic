@@ -1,0 +1,90 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+     <!-- / CLIENTS INFOS -->
+        <div id="clients-infos">
+
+                <h1>Stations <small>{{ name }}</small></h1>
+
+                <!-- CLIENTS EDIT 1 -->
+                <div id="clients-edit-form1" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 1 -->
+
+                <!-- CLIENT INFOS USERS -->
+                <div id="liste-clients-infos">
+                    {% for station in stations %}
+                        <div class="infos-client_entity" id="elementLine">
+                                <div class="client_entity entity colx5"><div class="margin"><strong>Station</strong><br /><a href="{{ path('doplus_paratronic_station_fiche_station', {'id': station.id}) }}"><strong>Voir {{ station.nom }}</strong></a>&nbsp;<a href="{{ path('doplus_paratronic_admin_edit_station', {'id': station.id}) }}"><strong>Modifier</strong></a></div></div>
+                                <div class="client_entity code-postal colx5"><div class="margin">Code postal<br />{% if station.cp %}<strong>{{ station.cp }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                <div class="client_entity ville colx5"><div class="margin">Ville<br />{% if station.ville %}<strong>{{ station.ville }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                <div class="client_entity nb-users colx5"><div class="margin">Capteurs<br /><a href="{{ path('doplus_paratronic_capteur_menu', {'id': station.id}) }}"><strong>{{ station.nbCapteurs }}</strong></a></div></div>
+                                <div class="client_entity delete colx5">
+                                        <div class="margin">
+                                                <a href="{{ path('doplus_paratronic_admin_delete_station', {'id': station.id}) }}"><strong>Supprimer</strong></a>
+                                                <form action="" method="post" accept-charset="UTF-8">
+                                                        <!-- jquery ui -->
+                                                        <input type="checkbox" id="entity-suppr4" class="button-jqui checkSuppr" value="4"><label for="entity-suppr4">&nbsp;</label>
+                                                </form>
+                                        </div>
+                                </div>
+                                <div class="clear"></div>
+                        </div>
+                    {% endfor %}                   
+                </div>
+                <!-- / CLIENT INFOS USERS -->
+
+                <!-- CLIENTS EDIT 2 -->
+                <div id="clients-edit-form2" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="sep colx3">&nbsp;</div>
+                                <div class="colx6">
+                                        <div class="margin">
+                                                <input type="button" value="Suppr. sélection" onclick="javascript:supprSelection('utilisateur');">
+                                        </div>
+                                </div>
+                            <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 2 -->
+        </div>
+        <!-- / CLIENTS INFOS -->
+{% endblock %}

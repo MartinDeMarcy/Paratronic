@@ -1,0 +1,54 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <div id="user-infos">
+            <h1>Paramètre limitation</h1>
+            {{ form_start(formLimitation, {'id': "form-limitation-action", 'attr': {'class': 'form-horizontal'}}) }}
+            {{ form_errors(formLimitation) }}
+            <div id="user-infos-form" class="col2-3">
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_errors(formLimitation.nbStations) }}
+                                        {{ form_label(formLimitation.nbStations, "Nombre de station") }}
+                                        {{ form_widget(formLimitation.nbStations, {'id': 'nbStations'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_errors(formLimitation.nbUtilisateurs) }}
+                                        {{ form_label(formLimitation.nbUtilisateurs, "Nombre d'utilisateurs") }}
+                                        {{ form_widget(formLimitation.nbUtilisateurs, {'id': 'nbUtilisateurs'}) }}
+                                    </div>
+                            </div>
+
+                            <p>
+                                <input type="hidden" name="client_id" value="3" />
+                                <input type="hidden" name="id" value="" />
+                            </p>
+                            <div class="clear"></div>
+                    </div>
+
+                    <div class="clear"></div>
+                    <div id="user-edit-form">
+                                    <div class="colx2">
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Annuler" onclick="history.go(-1);">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="valider_limitation" value="Valider">
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="clear"></div>
+
+                    </div>	
+
+    </div>
+{{ form_end(formLimitation) }}
+{% endblock %}

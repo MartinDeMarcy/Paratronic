@@ -1,0 +1,158 @@
+////////////////////////////////////////////////////////////////
+//
+//  QUADRON | ©PRAKT + DOPLUS
+//
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//
+//  FONCTIONS
+//
+////////////////////////////////////////////////////////////////
+
+// Transforme les pixels en em
+// L'argument context doit correspondre au context global
+@function pxem($px, $context: 14px) // <!> Attention context de base de Bootstrap › 14px
+{
+    @return ($px / $context) * 1em;
+}
+
+// Transforme les pixels en poucents
+// Le context est basé sur une grille de 1800px de large (modèle Quadron)
+@function pxpc($px, $context: 1800px)
+{
+    @return ($px / $context) * 100%;
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  MIXINS CLASSIQUES
+//
+////////////////////////////////////////////////////////////////
+
+// Nettoyage de fonts en css3
+@mixin clean_fonts
+{
+    font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+// Habillage spécial pour les listes déroulante, input text, input bouton (form-submit), textarea pour tel. et tablette
+// • !!!! • ne pas appliquer aux radios et checkbox • !!!! •
+@mixin clean_mobile
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+// Bordures arrondies
+@mixin border-radius($radius)
+{	
+	-webkit-border-radius: $radius;;
+	-moz-border-radius: $radius;;
+	-ms-border-radius: $radius;;
+	-o-border-radius: $radius;;
+	border-radius: $radius;;
+}
+
+// Ombrage élément
+@mixin box-shadow($shadow)
+{
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	-o-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+// Ombrage texte
+@mixin text-shadow($shadow)
+{
+	-webkit-text-shadow: $shadow;
+	-moz-text-shadow: $shadow;
+	-o-text-shadow: $shadow;
+	text-shadow: $shadow;
+}
+
+// Pour les images
+@mixin img($width)
+{
+    display: block;
+    width: $width;
+    height: auto;
+}
+
+// Activation des animations CSS 3
+// Désactivé par défaut par Bootstrap
+@mixin transition_on
+{
+    @include transition-property(all);
+    @include transition-duration($gb_transition_time);
+    @include transition-timing-function($gb_transition_easing);
+}
+
+// Annulation des animations CSS 3
+@mixin transition_off
+{
+    @include transition(none);
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  MIXINS BOOTSTRAP
+//
+////////////////////////////////////////////////////////////////
+
+/*
+	BOUTONS
+*/
+
+// primary (bleu)
+@mixin btsp_primary
+{
+	color: $gb_color_1;
+	background-image: -webkit-linear-gradient(top,#337ab7 0,#265a88 100%);
+	background-image: -o-linear-gradient(top,#337ab7 0,#265a88 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#337ab7),to(#265a88));
+	background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff265a88', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	background-repeat: repeat-x;
+	background-color: #337ab7;
+	@include text-shadow(0 -1px 0 rgba(0,0,0,.2));
+	@include box-shadow(0 1px 1px rgba(0,0,0,.075));  
+	@include border-radius(4px);
+	border: 1px solid transparent;
+	border-color: #245580;
+
+	&:hover {
+		background-color: #265a88;
+		background-position: 0 -15px;
+	}
+}
+
+@mixin btsp_default
+{
+	font-weight: 400;
+	color: #333;
+	background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	background-image: -o-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e0e0e0));
+	background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	background-repeat: repeat-x;
+	background-color: $gb_color_1;
+	@include text-shadow(0 1px 0 #fff);
+	@include box-shadow(0 1px 0 $gb_color_1);  
+	@include border-radius(4px);
+	border: 1px solid transparent;
+	border-color: #ccc;
+
+	&:hover {
+		background-color: #e0e0e0;
+		background-position: 0 -15px;
+	}
+}

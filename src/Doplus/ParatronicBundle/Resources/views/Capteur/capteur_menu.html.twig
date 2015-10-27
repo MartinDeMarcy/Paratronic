@@ -1,0 +1,82 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <!-- / CLIENTS INFOS -->
+        <div id="clients-infos">
+
+                <h1>Capteurs <small>{{ station.nom }}</small></h1>
+
+                <!-- CLIENTS EDIT 1 -->
+                <div id="clients-edit-form1" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_station_menu', {'id': station.client.id}) }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Ajout capteur" onclick="window.location.href='{{ path('doplus_paratronic_ajout_capteur', {'id': station.id}) }}';">
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 1 -->
+
+                <!-- CLIENT INFOS USERS -->
+                {% for capteur in capteurs %}
+                    <div id="liste-clients-infos">
+                            <div class="infos-client_entity" id="elementLine42">
+                                    <div class="client_entity entity colx5"><div class="margin"><strong>Capteur</strong><br /><a href="{{ path('doplus_paratronic_edit_capteur', {'id': capteur.id}) }}"><strong>{{ capteur.nom }}</strong></a></div></div>
+                                    <div class="client_entity colx5"><div class="margin">Unité<br />{% if capteur.unite.valeur %}<strong>{{ capteur.unite.valeur }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                    <div class="client_entity ville colx5"><div class="margin">Seuil pré-alerte<br />{% if capteur.seuilPreAlerte %}<strong>{{ capteur.seuilPreAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                    <div class="client_entity ville colx5"><div class="margin">Seuil d'alerte<br />{% if capteur.seuilAlerte %}<strong>{{ capteur.seuilAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                    <div class="client_entity delete colx5">
+                                            <div class="margin">
+                                                    <a href="{{ path('doplus_paratronic_delete_capteur', {'id': capteur.id}) }}" onclick="javascript:supprLine('capteur','42');"><strong>Supprimer</strong></a>
+                                                    <form action="" method="post" accept-charset="UTF-8">
+                                                            <!-- jquery ui -->
+                                                            <input type="checkbox" id="entity-suppr42" class="button-jqui checkSuppr" value="42"><label for="entity-suppr42">&nbsp;</label>
+                                                    </form>
+                                            </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="clear"></div>
+                            </div>
+                    </div>
+                {% endfor %}
+                <!-- / CLIENT INFOS USERS -->
+
+                <!-- CLIENTS EDIT 2 -->
+                <div id="clients-edit-form2" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx3">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_station_menu', {'id': station.client.id}) }}';">
+                                                </div>
+                                        </div>
+                                        <div class="colx3">
+                                            <div class="margin">
+                                                <input type="button" value="Ajout capteur" onclick="window.location.href='{{ path('doplus_paratronic_ajout_capteur', {'id': station.id}) }}';">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="sep colx3">&nbsp;</div>
+                                <div class="colx6">
+                                        <div class="margin">
+                                                <input type="button" value="Suppr. sélection" onclick="javascript:supprSelection('capteur');">
+                                        </div>
+                                </div>
+                                <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 2 -->
+
+        </div>
+        <!-- / CLIENTS INFOS -->
+{% endblock %}

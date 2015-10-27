@@ -1,0 +1,176 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <div id="user-infos">
+            <h1>{% if client.codeClient %}Modifier {% else %}Ajouter {% endif %}client</h1>
+            {% if form_errors(formClient.raisonSociale) != NULL or form_errors(formClient.codeClient) != NULL%}
+                <section id="messages" class="error">
+                        <div class="margin">
+                                <p>{{ form_errors(formClient.raisonSociale) }}</p>
+                                <p>{{ form_errors(formClient.codeClient) }}</p>
+                        </div>				
+                        <div class="clear"></div>
+                </section>
+            {% endif %}
+                    <div id="user-infos-form" class="col2-3">
+                        {{ form_start(formClient, {'id': "form-client-action", 'attr': {'class': 'form-horizontal'}}) }}
+                        
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.raisonSociale, "Raison Sociale") }}
+                                        {{ form_widget(formClient.raisonSociale, {'id': 'raisonSociale'}) }}
+                                    </div>
+                            </div>
+                            <div class="colx2">
+
+                                    <div class="margin">
+                                        {{ form_label(formClient.statutJuridique, "Statut Juridique") }}
+                                        {{ form_widget(formClient.statutJuridique, {'id': 'statutjuridique'}) }}  
+                                    </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.service, "Service") }}
+                                        {{ form_widget(formClient.service, {'id': 'service'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_errors(formClient.image) }}
+                                        {{ form_label(formClient.image, "Photo (hauteur max 70px)") }}
+                                        {{ form_widget(formClient.image, {'id': 'image'}) }}  
+                                    </div>
+                            </div>
+                                    
+                            <!-- ATTENTION - respecter les classes colx3 et col-picture pour la zone photo existante -->
+                            <div class="colx3 col-picture">
+                                <div class="margin">
+                                    {% if client.pathImage %}
+                                        <label for="user-edit-photo">Photo existante</label>
+                                        <div class="user-infos-picture">
+                                                <img src="{{ asset(client.getWebPath()) }}" height="70" />
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- ATTENTION - toujours ajouter un clear après la photo et redémarrer l'imprication normalement -->
+
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        
+                                        {{ form_label(formClient.codeClient, "Code Client*") }}
+                                        {{ form_widget(formClient.codeClient, {'id': 'codeClient'}) }}  
+                                    </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.adresse, "Adresse") }}
+                                        {{ form_widget(formClient.adresse, {'id': 'adresse'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.cp, "Code Postal") }}
+                                        {{ form_widget(formClient.cp, {'id': 'cp'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.ville, "Ville") }}
+                                        {{ form_widget(formClient.ville, {'id': 'ville'}) }}
+                                    </div>
+                            </div>
+                            <div class="clear"></div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.coordonneesAdministratives, "Coordonnées Administratives") }}
+                                        {{ form_widget(formClient.coordonneesAdministratives, {'id': 'coordonneesAdministratives'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.mail, "Mail") }}
+                                        {{ form_widget(formClient.mail, {'id': 'mail'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.telephone, "Téléphone") }}
+                                        {{ form_widget(formClient.telephone, {'id': 'telephone'}) }}
+                                    </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.nomResponsable, "Nom Responsable") }}
+                                        {{ form_widget(formClient.nomResponsable, {'id': 'nomResponsable'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(formClient.prenomResponsable, "Prénom Responsable") }}
+                                        {{ form_widget(formClient.prenomResponsable, {'id': 'prenomResponsable'}) }}
+                                    </div>
+                            </div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                            {{ form_label(formClient.statut, "Statut") }}
+                                            <div class="option-check-rad">
+                                                {{ form_widget(formClient.statut, {'id': 'statut'}) }}
+                                            </div>
+                                    </div>
+                            </div>
+
+                             <div class="colx2">
+                                    <div class="margin">
+                                            {{ form_label(formClient.etat, "Etat") }}
+                                            <div class="checkbox">
+                                                Actif{{ form_widget(formClient.etat, {'id': 'etat'}) }}
+                                            </div>
+                                    </div>
+                            </div>
+                            <p>
+                                <input type="hidden" name="id" value="" />
+                            </p>
+                            <div class="clear"></div>
+            </div>
+
+                    <div class="clear"></div>
+                    <div id="user-edit-form">
+                                    <div class="colx2">
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Annuler" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}';">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="valider_client" value="Valider">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="suppr_client" value="Supprimer">
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="clear"></div>
+
+                    </div>	
+
+    </div>
+{{ form_end(formClient) }}
+{% endblock %}

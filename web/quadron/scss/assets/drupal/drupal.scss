@@ -1,0 +1,641 @@
+////////////////////////////////////////////////////////////////
+//
+//  QUADRON | ©PRAKT + DOPLUS
+//
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//
+//  DRUPAL
+//
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//
+//  COLONNES (CONTENT / SIDEBAR)
+//
+////////////////////////////////////////////////////////////////
+
+/*
+    ONE SIDEBAR
+*/
+.one-sidebar {
+    
+    #content{
+        width: 75%;
+        float: left;
+        //overflow: hidden;
+        
+        .ie7 & {
+            width: 74.9%;
+        }
+    }
+    
+    .sidebar {
+        width: 25%;
+        float: left;
+        //overflow: hidden;
+        
+        &#sidebar-second .section {
+            margin-left: 10px;
+            padding: 0 20px 0 30px;
+            border-left: 1px solid $gb_color_2;
+        }
+    }
+}
+
+/*
+    TWO SIDEBAR
+*/
+.two-sidebars {
+    
+    #content {
+        width: 50%;
+        float: left;
+        //overflow: hidden;
+        
+        .ie7 & {
+            width: 49.9%;
+        }
+    }
+    
+    .sidebar {
+        width: 25%;
+        float: left;
+        //overflow: hidden;
+    }
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  MESSAGES
+//
+////////////////////////////////////////////////////////////////
+
+#messages {
+    width: 100%;
+    z-index: 11;
+    
+    .main {
+        padding: 0 !important;
+        background: none !important;
+    }
+    
+    .section {
+        //margin: 0 10px;
+        background: $gb_color_2;
+    }
+    
+    .messages {
+        position: relative;
+        background-position: initial !important;
+        background-repeat: no-repeat !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 15px 40px 15px 20px !important;
+    }
+    
+    .status {
+        background: #01d758;
+        background-image: none;
+        border: none;
+        color: $gb_color_2;
+        
+        a.close {
+            color: $gb_color_2;
+        }
+    }
+    
+    .error {
+        background-image: none;
+        background-color: red;
+        border: none;
+        color: $gb_color_1;
+        
+        a.close {
+            color: $gb_color_1;
+        }
+    }
+    
+    p {
+        margin: 0;
+    }
+    
+    a.close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-family: Verdana, Geneva, sans-serif;
+        text-decoration: none;
+    }
+    
+    a.close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-family: Verdana, Geneva, sans-serif;
+		font-weight: 700;
+        text-decoration: none;
+		opacity: 0.5;
+		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; // IE8
+		/* This works in IE 8 & 9 too */
+		/* ... but also 5, 6, 7 */
+		filter: alpha(opacity=50); // IE 5-7
+		
+		&:hover {
+			opacity: 0.7;
+			-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; // IE8
+			/* This works in IE 8 & 9 too */
+			/* ... but also 5, 6, 7 */
+			filter: alpha(opacity=70); // IE 5-7
+		}
+	}
+    
+    .element-invisible {
+        display: none;
+    }
+    
+    ul {
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+        border-top: 1px solid !important;
+    
+        li {
+            margin: 0 !important;
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+            border-bottom: 1px solid !important;
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  FORM
+//
+////////////////////////////////////////////////////////////////
+
+form {
+	
+	.form-item {
+		margin-bottom: 15px;
+	}
+					   
+	label {
+    }
+    
+    input,
+    select,
+    textarea {
+		width: 100%;
+		height: 34px;
+		padding: 6px 12px;
+        font-size: pxem(14px);
+        line-height: pxem(20px,14px);
+		color: $gb_color_2;
+		background: $gb_color_1;
+		border: 1px solid $gb_color_gris_2;
+		@include border-radius(4px);
+		@include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+        @include clean_fonts;
+		
+		&:focus {
+			border-color: #66afe9;
+			outline: 0;
+			@include box-shadow(0 0 8px rgba(102,175,233,.6));
+		}
+    }
+    
+    input {
+		
+		&.form-text {
+			@include clean_mobile;
+		}
+		
+		&.hasDatepicker {
+			width: auto;
+			margin-bottom: 0;
+			padding: 3px;
+			text-indent: 0;
+		}
+    }
+    
+    select {
+		@include clean_mobile;
+        
+        option {
+        }
+    }
+    
+    textarea {
+		height: auto;
+		height: 145px;
+		min-height: 145px;
+        max-width: 100%;
+		@include clean_mobile;
+    }
+	
+	.grippie { // spécial chrome
+/*		border: 1px solid #ccc !important;
+		background-color: #ccc !important;*/
+	}
+	
+	.form-type-radio {
+			
+		.form-radio {
+			/*width: auto;*/
+		}
+
+		label {
+/*			display: inline;
+			font-weight: normal;*/
+		}
+	}
+	
+	.form-type-checkbox {
+		
+		.form-checkbox {
+/*			width: auto;
+			float: left;
+			display: inline;
+			margin: 3px 10px 0 0;*/
+		}
+
+		label {
+/*			overflow: hidden;
+			font-weight: normal;*/
+		}
+	}
+    
+    .form-required {
+        color: red;
+    }
+    
+	.form-actions {
+		margin-bottom: 15px;
+		
+		.form-submit {
+			height: auto; 
+			padding: 10px 15px;
+			font-weight: 700;
+			@include btsp_primary;
+			@include clean_mobile;
+
+			&:hover {
+				background-color: #265a88;
+				background-position: 0 -15px;
+			}
+		}
+	}
+	
+	.error {
+		background: red;
+		color: $gb_color_1;
+		
+		&::-webkit-input-placeholder { color: $gb_color_2; }
+		&:-moz-placeholder { color: $gb_color_2; }
+		&::-moz-placeholder { color: $gb_color_2; }
+		&:-ms-input-placeholder { color: $gb_color_2; }
+	}
+	
+	::-webkit-input-placeholder { color: $gb_color_gris_2; }
+	:-moz-placeholder { color: $gb_color_gris_2; }
+	::-moz-placeholder { color: $gb_color_gris_2; }
+	:-ms-input-placeholder { color: $gb_color_gris_2; }
+	
+	// captcha
+    .captcha {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: $gb_color_gris_1;
+        
+        img {
+            border: 1px solid $gb_color_gris_2;
+        }
+        
+        label {
+            margin: 15px 0 5px;
+			font-weight: normal;
+        }
+        
+        .form-item-captcha-response {
+            margin-bottom: 0;
+            
+            #edit-captcha-response {
+                //width: 37px; /* si captcha math */
+                width: 100px; /* si captcha image 6 caractères */
+                text-align: center;
+                text-indent: 0;
+            }
+
+            .description {
+                display: none;
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  FORM CONNEXION / USER PASSWORD
+//
+////////////////////////////////////////////////////////////////
+
+/* 
+    page user et block spécial connexion + récupération de mot de passe
+*/
+#user-login,
+#block-user-login,
+#user-pass {
+	clear: both;
+    width: 50%;
+    margin: 0 auto;
+    padding: 40px 10px 0;
+	
+    @media screen and (max-width: 1200px) {
+        width: 66.6%;
+    }
+    @media screen and (max-width: 768px) {
+        width: auto;
+    }
+	
+	> div {
+		margin-bottom: 30px;
+		padding-bottom: 15px;
+		border-bottom: 1px solid $gb_color_gris_2;
+	}
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  PAGE PROFIL
+//
+////////////////////////////////////////////////////////////////
+
+/*
+    historique
+*/
+.page-user {
+    
+    .profile {
+        padding-bottom: 40px;
+        
+        h3 {
+            margin-bottom: 25px;
+        }
+    }
+}
+
+/*
+    modification information (l'utilisateur n'a pas accès au thème d'admin)
+*/
+.page-user-edit {
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  TABS
+//
+////////////////////////////////////////////////////////////////
+
+div.tabs {
+    position: fixed;
+    z-index: 500;
+    left: 0;
+    bottom: 50px;
+    
+    h2 {
+        display: none;
+    }
+    
+    ul.tabs {
+		list-style: none;
+		margin-left: -4px;
+		margin-bottom: 0;
+		padding: 0;
+        
+        li {
+
+            a {
+                display: block;
+                margin-bottom: 10px;
+                padding: 12px 15px;
+				font-family: Helvetica, Arial, sans-serif;
+                font-size: pxem(13px);
+				font-weight: 700;
+                text-decoration: none;
+                text-transform: uppercase;
+				@include btsp_primary;
+
+                &:hover {
+					background-color: #265a88;
+					background-position: 0 -15px;
+                }
+			
+				&.active {
+					@include btsp_default;
+				}
+            }
+        }
+    }
+	
+	// SPE - quand connexion ou récupération mot de passe
+	.not-logged-in.page-user & {
+		position: static;
+		z-index: auto;
+		left: auto;
+		bottom: auto;
+		margin-bottom: 60px;
+		
+		ul.tabs {
+			margin-left: 0;
+			
+			li {
+				width: 50%;
+				margin: 0 auto;
+				padding: 0 10px;
+	
+				@media screen and (max-width: 1200px) {
+					width: 66.6%;
+				}
+				@media screen and (max-width: 768px) {
+					width: auto;
+				}
+			
+				&.active {
+					display: none
+				}
+				
+				a {
+					padding: 10px 15px;
+					font-size: pxem(14px);
+					text-transform: none; 
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  TABS FIELD COLLECTION
+//
+////////////////////////////////////////////////////////////////
+
+/*
+.field-collection-view-links,
+.action-links-field-collection-add {
+    display: none;
+}
+*/
+
+////////////////////////////////////////////////////////////////
+//
+//  ADMIN MENU ( BARRE ADMIN MENU )
+//
+////////////////////////////////////////////////////////////////
+
+/* la marge peut varier selon les sites */
+html body.admin-menu {
+    margin-top: 34px !important;
+}
+
+#admin-menu {
+    box-shadow: none;
+    padding-top: 0;
+    z-index: 9000;
+    
+    a,
+    li {
+        font-size: 12px;
+        line-height: 20px;
+    }
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  PAGER TAXONOMY CLASSIC
+//
+////////////////////////////////////////////////////////////////
+
+.pager {
+    clear: both;
+	margin: 0 !important;
+	padding: 40px 0 !important;
+    text-align: center;
+	list-style: none !important;
+	
+	li {
+		display: inline;
+	
+		&.pager-current {
+			margin: 0 10px;
+			text-decoration: none;
+			color: aqua;
+			border: none;
+			cursor: default;
+		}
+
+		a {
+			display: inline;
+			margin: 0 10px;
+			padding: 0;
+			border: none;
+			text-decoration: none;
+			color: red;
+			background: none;
+			border: none;
+			@include border-radius(0);
+
+			&:hover {
+				color: aqua;
+				background: none;
+				border-bottom: 1px solid aqua;
+			}
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  WEBFORM
+//
+////////////////////////////////////////////////////////////////
+
+/*
+	Formulaire basique
+*/
+.webform-client-form { // changer cette classe (privilégier insérer le bloc webform via une champ de bloc de display pour ajouter une classe englobante)
+}
+
+/*
+	Éléments jQuery UI
+
+// calendrier
+#ui-datepicker-div {
+	font-family: Arial;
+	background: #eaecec;
+	border: none;
+	@include clean_fonts;
+	@include clean_mobile;
+	@include border-radius(0px);
+	
+	// mois
+	.ui-widget-header {
+		color: #555;
+		background: #bbb;
+		border: 1px solid #bbb;
+		@include border-radius(0px);
+		
+		.ui-state-hover, 
+		.ui-state-focus {
+			background: #bbb;
+			border: 1px solid #bbb;
+			cursor: pointer;
+			@include border-radius(0px);
+		}
+	}
+	
+	// jours
+	.ui-datepicker-calendar{
+		
+		.ui-state-default {
+			color: #555;
+			background: #bbb;
+			border: 1px solid #eaecec;
+		}
+		
+		.ui-datepicker-today .ui-state-default {
+			color: $gb_color_1;
+			background: #bbb;
+		}
+		.ui-datepicker-today .ui-state-default.ui-state-active {
+			color: $gb_color_1;
+			background: #bbb;
+		}
+		
+		.ui-state-hover,
+		.ui-state-active {
+			color: #555;
+			background: $gb_color_1;
+		}
+	}
+}
+*/
+
+/*
+	GESTION POUR WEBKIT - Supprimme le contour (outline) par défaut au focus
+*/
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input.hasDatepicker:focus,
+select:focus,
+button:focus,
+textarea:focus {
+	outline:none;
+}

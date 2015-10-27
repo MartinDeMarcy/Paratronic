@@ -1,0 +1,10 @@
+<div class="station-client col2-3">
+        <div id="list-station">
+                <select name="select_station" id="select_station" class="selectmenu-jqui">
+                        <option value="" selected="selected" class="default-selected">Cliquez ici pour choisir une station</option>
+                        {% for station in stations %}
+                            <option value="{{ path('doplus_paratronic_station_fiche_station', {'id': station.id}) }}">{{ station.nom }}</option>
+                        {% endfor %}
+                </select>
+        </div>
+</div>

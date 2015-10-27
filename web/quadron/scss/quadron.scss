@@ -1,0 +1,101 @@
+////////////////////////////////////////////////////////////////
+//
+//  QUADRON | ©PRAKT + DOPLUS
+//
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//
+//  APPELS DES SOURCES
+//
+////////////////////////////////////////////////////////////////
+
+
+
+// ENLEVER CSS STARTER PUIS CHOISIR SON MODE DE TRAVAIL
+
+
+
+////////////////////////////////////////////////////////////////
+//
+//  STARTER : TOUT EST ACTIVÉ (à enlever)
+//
+////////////////////////////////////////////////////////////////
+
+// COMPASS
+@import "compass/css3";	
+
+// BOOTSTRAP
+@import "../css/libs/bootstrap.min.css";	
+
+// SCSS DYNAMIQUE
+@import "dyn.scss";												// Appels SCSS dynamique (variables dynamiques)
+@import "qdr_lib.scss";											// Appels de la lib SCSS Quadron (fonctions et mixins globales)
+@import "fonts.scss";
+
+// STRUCTURE BASIQUE & COMPOSANTS BASIQUE (si utilisation de l'outil)
+@import "./assets/outil/basic.scss"; 
+@import "./assets/outil/basic-components.scss";
+
+// SOURCES (pour la surcharge)
+@import "header.scss";
+@import "footer.scss";
+@import "layout.scss";										// <!> doit être appelé en dernier
+
+
+
+////////////////////////////////////////////////////////////////
+//
+//  DÈV. MANO
+//
+////////////////////////////////////////////////////////////////
+
+// COMPASS
+//@import "compass/css3";										// Appel de compass pour SASS, ne pas supprimer
+
+// BOOTSTRAP
+//@import "../css/libs/bootstrap.min.css";							// Appel de Boostrap
+//@import "../css/libs/bootstrap-theme.min.css";						// Appel des composants de Bootstrap (facultatif)
+
+// SCSS DYNAMIQUE
+//@import "dyn.scss";											// Appels SCSS dynamique (variables dynamiques)
+//@import "qdr_lib.scss";										// Appels de la lib SCSS Quadron (fonctions et mixins globales)
+//@import "fonts.scss";											// Appels des fonts utilisées
+
+// STRUCTURE BASIQUE & COMPOSANTS BASIQUE (si utilisation de l'outil)
+//@import "./assets/outil/basic.scss"; 
+//@import "./assets/outil/basic-components.scss";
+
+// SOURCES (pour la surcharge)
+//@import "header.scss";
+//@import "footer.scss";
+//@import "layout.scss";										// <!> doit être appelé en dernier
+// autres fichiers…
+
+
+
+////////////////////////////////////////////////////////////////
+//
+//  DRUPAL
+//
+////////////////////////////////////////////////////////////////
+
+// COMPASS
+//@import "compass/css3";										// Appel de compass pour SASS, ne pas supprimer
+
+// BOOTSTRAP
+//@import "../css/libs/bootstrap.min.css";							// Appel de Boostrap
+
+// SCSS DYNAMIQUE
+//@import "dyn.scss";											// Appels SCSS dynamique (variables dynamiques)
+//@import "qdr_lib.scss";										// Appels de la lib SCSS Quadron (fonctions et mixins globales)
+//@import "fonts.scss";											// Appels des fonts utilisées
+
+// ASSETS
+//@import "./assets/drupal/drupal.scss";						// Drupal (important de l'appeler après les scss dynamiques)
+
+// SOURCES (pour la surcharge)
+//@import "header.scss";
+//@import "footer.scss";
+//@import "layout.scss"; 	
+// autres fichiers…

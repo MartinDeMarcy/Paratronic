@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<!-- META & autres -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="description" content="Le Superviseur de Paratronic.">
+		<title>{% block title %} Paratronic - Superviseur {% endblock %}</title>
+		<link rel="icon" type="image/png" href="http://paratronic.doplus.pro/quadron/favicon.png" />
+                <link rel="shortcut icon" href="{{ asset('quadron/chaine-chomper-icone-9045-16.png') }}"/>
+		<!-- CSS -->
+                {% block stylesheets %}
+                    <link href="{{ asset('quadron_tool/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
+                    <link href="{{ asset('quadron/css/libs/bootstrap.min.css') }}" rel="stylesheet">
+                    {#<link href="{{ asset('quadron/css/quadron.css') }}" rel="stylesheet">#}
+                {% endblock %}
+		<link type="text/css" rel="stylesheet" href="http://paratronic.doplus.pro/quadron/css/reset.css" media="all">
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+		<link type="text/css" rel="stylesheet" href="http://paratronic.doplus.pro/quadron/css/libs/jquery.bxslider.css" media="all">
+		<link type="text/css" rel="stylesheet" href="http://paratronic.doplus.pro/quadron/css/z-final-core.css" media="all">
+		<link type="text/css" rel="stylesheet" href="http://paratronic.doplus.pro/quadron/css/z-final-spe.css" media="all">
+		<!-- JS -->
+                <script src="{{ asset('quadron/js/libs/jquery.min.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('quadron/js/libs/jquery-migrate.min.js') }}" type="text/javascript"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/jquery-1.8.2.min.js"></script>
+		<script src="{{ asset('quadron_tool/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('quadron/js/libs/bootstrap.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('quadron/js/libs/modernizr.min.js') }}" type="text/javascript"></script>
+                <script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/modernizr.js"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/respond.min.js"></script>
+                <script src="{{ asset('quadron/js/libs/jquery.placeholder.min.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('quadron/js/libs/jquery.scrollTo.min.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('quadron/js/libs/jquery.easing.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('quadron_tool/plugins/jquery-ui/datepicker-fr.js') }}" type="text/javascript"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/jquery.fitvids.min.js"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/jquery.bxslider.min.js"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/jquery.multiselect.min.js"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/min/function.min.js"></script>
+		<script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/min/call.min.js"></script>
+                <script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/gmap3.js"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+                <script src="{{ asset('quadron_tool/plugins/jquery-ui/jquery.ui.addresspicker.js') }}" type="text/javascript"></script>
+                
+                <script src="http://paratronic.doplus.pro/quadron/js/libs/highcharts/js/highcharts.js"></script>
+                <script src="http://paratronic.doplus.pro/quadron/js/libs/highcharts/js/modules/exporting.js"></script>
+
+                <script type="text/javascript" src="http://paratronic.doplus.pro/quadron/js/libs/jwplayer/jwplayer.js"></script>
+                <script type="text/javascript">jwplayer.key="3NL8QNyWAzXciWNxYRM2og2QFlnU2cQn/F98Nw==";</script>
+                <script src="{{ asset('quadron/js/quadron.min.js') }}" type="text/javascript"></script>
+	</head>
+
+
+	<body class="front">
+                            <header id="header">
+			<!-- USER MENU - logged only -->
+			<div id="user-menu">
+				<div class="margin">
+					<div class="user-menu-infos colx3">
+                                            <div class="c-user-nom-societe">
+						<div class="user-nom">Admin Admin</div>
+						<div class="user-societe">Paratronic</div>
+                                            </div>
+					</div>
+					<div class="user-menu-link col2-3">
+						<div class="user-logout colx6"><a href="">Déconnexion</a></div>
+						<div class="user-config colx6"><a href="{{ path('doplus_paratronic_admin_menu') }}">Administration</a></div>
+                                                <div class="home-carto colx6"><a href="{{ path('doplus_paratronic_home_index') }}">Cartographie</a></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<!-- / USER MENU -->
+
+                        <a href="http://www.paratronic.com/" title="Accueil" rel="home" id="logo" target="_blank"></a>
+			<div class="clear"></div>
+		</header>
+
+		<section id="main">
+			
+			<!--  CLIENT & STATION -->
+			<div id="client-station">
+				<div class="logo-client colx3">
+                                    	<div class="margin">
+                                            <a href="{{ path('doplus_paratronic_home_index') }}"><img src="{{ asset('quadron/logo.png') }}" alt="Paratronic" /></a>
+					</div>
+                                </div>
+				{% render controller("DoplusParatronicBundle:Home:layout") %}
+				<div class="clear"></div>
+			</div>
+			<!-- / CLIENT & STATION -->
+                        
+                <div id="content">{% block content %}{% endblock %}</div>
+                <div class="clear"></div>
+		</section>
+		<footer id="footer">
+			<div id="foo-legal">
+				<span class="topofpage"><a href="#"><span class="top-txt">HAUT DE PAGE</span><span class="top-ico"></span>&nbsp;</a></span>
+				<span>2014 © PARATRONIC</span>
+				<span><a href="{{ path('doplus_paratronic_cgv_condition') }}">Conditions d'utilisations</a></span>
+				<span><a href="http://www.paratronic.com" target="_blank">www.paratronic.com</a></span>
+			</div>
+			<div class="clear"></div>
+		</footer>
+
+	</body>
+
+</html>

@@ -1,0 +1,63 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <div id="clients-infos">
+
+        <h1>Paramètre <small>{{ name }}</small></h1>
+
+                <!-- CLIENTS EDIT 1 -->
+                <div id="clients-edit-form1" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}'">
+                                                </div>
+                                        </div> 
+                                </div>
+                                <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 1 -->
+
+                <!-- CLIENT INFOS USERS -->
+                <div id="liste-clients-infos">
+                        <div class="infos-client_entity">
+                                <div class="client_entity entity colx2"><div class="margin"><strong>Paramètre</strong><br /><a href="{{ path('doplus_paratronic_parametre_alerte', {'id': id}) }}"><strong>Gestion des alertes</strong></a></div></div>
+                                <div class="client_entity code-postal colx2"><div class="margin">Description<br /><strong>Défini l'intervalle de temps entre les alertes (en minutes)</strong></div></div>
+                                <div class="clear"></div>
+                        </div>
+                        <div class="infos-client_entity">
+                                <div class="client_entity entity colx2"><div class="margin"><strong>Paramètre</strong><br /><a href="{{ path('doplus_paratronic_parametre_abonnement', {'id': id}) }}"><strong>Gestion des abonnements</strong></a></div></div>
+                                <div class="client_entity code-postal colx2"><div class="margin">Description<br /><strong>Défini l'intervalle de temps de l'abonnement (conservation de l'historique)</strong></div></div>
+                                <div class="clear"></div>
+                        </div>
+                    
+                         <div class="infos-client_entity">
+                                <div class="client_entity entity colx2"><div class="margin"><strong>Paramètre</strong><br /><a href="{{ path('doplus_paratronic_parametre_limitation', {'id': id}) }}"><strong>Gestion des limitations</strong></a></div></div>
+                                <div class="client_entity code-postal colx2"><div class="margin">Description<br /><strong>Limitation d'usage : Nb utilisateurs / Nb stations</strong></div></div>
+                                <div class="clear"></div>
+                        </div>
+                       
+
+                </div>
+                <!-- / CLIENT INFOS USERS -->
+
+                <!-- CLIENTS EDIT 2 -->
+                <div id="clients-edit-form2" class="clients-edit-form">
+                        <form action="" method="post" accept-charset="UTF-8">
+                                <div class="colx2">
+                                        <div class="colx4">
+                                                <div class="margin">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}'">
+                                                </div>
+                                        </div>
+
+                                </div>
+                                <div class="clear"></div>
+                        </form>
+                </div>			
+                <!-- / CLIENTS EDIT 2 -->
+        </div>
+{% endblock %}

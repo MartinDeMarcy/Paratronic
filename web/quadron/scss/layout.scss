@@ -1,0 +1,113 @@
+////////////////////////////////////////////////////////////////
+//
+//  QUADRON | ©PRAKT + DOPLUS
+//
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//
+//  LAYOUT
+//
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+//
+//  HTML
+//
+////////////////////////////////////////////////////////////////
+
+body {
+	// 2015-02-09
+	// <!> Boostrap impose un 14px en taille de base.
+	// Pour changer la taille globale il faut indiquer un font-size en px dans le body ==> exemple : font-size: 16px;
+	// <!> Dans ce cas attention à modifier le context dans le fichier qdr_lib.scss
+	// Ensuite, utilisez dans les autres éléments ==> font-size: pxem(Xpx);
+	font-family: $gb_font;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	//font-family: $gb_font_prata_r;
+	//font-weight: normal;
+}
+
+h1 {
+	//margin: 0;
+	//font-size: pxem(48px);
+	//line-height: normal;
+	color: $gb_color_bleu_1;
+}
+
+h2 {
+	//font-size: pxem(24px);
+	//line-height: normal;
+}
+
+h3 {
+	//font-size: pxem(18px);
+	//line-height: normal;
+}
+
+a {
+	color: $gb_color_bleu_1;
+	
+	&:hover {
+		color: $gb_color_bleu_1;
+	}
+	
+	&:focus,
+	&:visited {
+		text-decoration: none;
+	}
+}
+
+b,
+strong {
+	//font-family: $gb_font_ba_b;
+	//font-weight: normal;
+}
+
+////////////////////////////////////////////////////////////////
+//
+//  DIVERS UTILES
+//
+////////////////////////////////////////////////////////////////
+
+// Animations CSS 3 (voir mixin qdr_lib.scss)
+// transition_on : transition activées
+// transition_off : transition désactivées
+* { @include transition_off; }
+
+// Lissage des polices <!> agit sur tout le code
+* { @include clean_fonts; }
+
+// Sélection texte
+::-moz-selection { color: $gb_color_1;  background: $gb_color_2; }
+::selection      { color: $gb_color_1;  background: $gb_color_2; }
+
+// Clear Quadron
+.clear { clear:both; overflow:hidden; height:0; line-height: 0; }
+
+////////////////////////////////////////////////////////////////
+//
+//  GLOBAL
+//
+////////////////////////////////////////////////////////////////
+
+#main {
+
+}
+
+.main {
+/*	width: 1200px;
+	margin: 0 auto;
+    
+    @media screen and (max-width: 1200px) {
+        width: 960px;
+    }
+    @media screen and (max-width: 960px) {
+        width: auto;
+    }*/
+}

@@ -1,0 +1,116 @@
+#Home Controller
+doplus_paratronic_home_index:
+    path:    /
+    defaults: { _controller: DoplusParatronicBundle:Home:index }
+
+
+#CGV Controller
+doplus_paratronic_cgv_condition:
+    path:    /cgv
+    defaults: { _controller: DoplusParatronicBundle:CGV:cgv }
+
+
+#Admin Controller
+doplus_paratronic_admin_menu:
+    path:    /admin/menu
+    defaults: { _controller: DoplusParatronicBundle:Admin:adminMenu }
+
+
+#Admin Controller - Client Actions
+doplus_paratronic_admin_ajout_client:
+    path:    /admin/ajout_client
+    defaults: { _controller: DoplusParatronicBundle:Admin:ajoutClient }
+    
+doplus_paratronic_admin_edit_client:
+    path:    /admin/edit_client/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:editClient }
+    
+doplus_paratronic_admin_delete_client:
+    path:    /admin/delete_client/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:deleteClient }
+
+
+#Admin Controller - User Actions
+doplus_paratronic_admin_ajout_user:
+    path:    /admin/user/ajout
+    defaults: { _controller: DoplusParatronicBundle:Admin:ajoutUser }
+    
+doplus_paratronic_admin_edit_user:
+    path:    /admin/edit_user/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:editUser }
+    
+doplus_paratronic_admin_delete_user:
+    path:    /admin/delete_user/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:deleteUser }
+    
+doplus_paratronic_admin_user_menu:
+    path:    /admin/user/menu/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:menuUser }
+    
+
+#Admin Controller - Station Actions    
+doplus_paratronic_admin_ajout_station:
+    path:    /admin/station/ajout
+    defaults: { _controller: DoplusParatronicBundle:Admin:ajoutStation }
+    
+doplus_paratronic_admin_edit_station:
+    path:    /admin/edit_station/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:editStation }
+    
+doplus_paratronic_admin_delete_station:
+    path:    /admin/delete_station/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:deleteStation }
+    
+doplus_paratronic_admin_station_menu:
+    path:    /admin/station/menu/{id}
+    defaults: { _controller: DoplusParatronicBundle:Admin:menuStation }
+    
+    
+#Parametre Controller
+doplus_paratronic_parametre_menu:
+    path:    /parametre/index/{id}
+    defaults: { _controller: DoplusParatronicBundle:Parametre:index }
+    
+doplus_paratronic_parametre_alerte:
+    path:    /parametre/alerte/{id}
+    defaults: { _controller: DoplusParatronicBundle:Parametre:alerte }
+    
+doplus_paratronic_parametre_abonnement:
+    path:    /parametre/abonnement/{id}
+    defaults: { _controller: DoplusParatronicBundle:Parametre:abonnement }
+    
+doplus_paratronic_parametre_limitation:
+    path:    /parametre/limitation/{id}
+    defaults: { _controller: DoplusParatronicBundle:Parametre:limitation }
+    
+    
+#Station Controller
+doplus_paratronic_station_fiche_station:
+    path:    /station/fiche_station/{id}
+    defaults: { _controller: DoplusParatronicBundle:Station:ficheStation }
+    
+#Capteur Controller
+doplus_paratronic_capteur_menu:
+    path:    /capteur/menu/{id}
+    defaults: { _controller: DoplusParatronicBundle:Capteur:capteurMenu }
+    
+doplus_paratronic_ajout_capteur:
+    path:    /capteur/ajout/{id}
+    defaults: { _controller: DoplusParatronicBundle:Capteur:ajoutCapteur }
+
+doplus_paratronic_edit_capteur:
+    path:    /capteur/edit/{id}
+    defaults: { _controller: DoplusParatronicBundle:Capteur:editCapteur }
+    
+doplus_paratronic_delete_capteur:
+    path:    /capteur/delete/{id}
+    defaults: { _controller: DoplusParatronicBundle:Capteur:deleteCapteur }
+    
+# test
+doplus_paratronic_test:
+    path:    /test
+    defaults: { _controller: DoplusParatronicBundle:Admin:test }
+    
+#login:
+#    path:    /login
+#    defaults: { _controller: DoplusParatronicBundle:Home:login }

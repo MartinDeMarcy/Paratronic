@@ -1,0 +1,129 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <!-- STATION -->
+			<div id="station">
+				<div class="station-img colx3">
+					<!-- IMPÉRATIF : effectuer un crop de l'image pour qu'elle fasse 520px de haut et 780px de large -->
+					<img src="{{ asset(station.getWebPath()) }}" height="520" width="780" alt ="Station nom_ville" />
+				</div>
+				<div class="station-content col2-3">
+					<div class="menu-station">
+						<div class="releves-station colx4"><div class="margin">Analyse</div></div>
+						<div class="infos-station colx4 active"><div class="margin">Statut instantané</div></div>
+						<div class="clear"></div>
+					</div>
+					
+					<h1>Reyrieux</h1>
+					<div class="content1 colx2">
+						<div class="margin">
+							<div class="adresse">{{ station.adresse }}</div>
+							<div class="latitude">Lat. {{ station.coordonneesGpsLat }}</div>
+							<div class="logitude">Lon. {{ station.coordonneesGpsLng }}</div>
+							<div class="hydro">Hydro. {{ station.codeHydrologique }}</div>
+						</div>
+					</div>
+					<div class="content2 colx2">
+						<div class="margin">
+							<p><strong>Informations.</strong></p>
+							<div class="txt"><p>{{ station.description }}</p></div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<!-- / STATION -->
+
+			<!-- CONTAINER RELEVÉS -->
+			<div id="container-releves">
+				
+				<!-- PERIODE & INFOS -->
+				<div id="releves-periode">
+                                    <form id="filtre_mesures" action="" method="post">
+					<div class="date colx3">
+						<div class="margin">
+							<div class="date-du colx2">
+								<label>Du</label>
+								<input type="text" class="datepicker-jqui" name="date_debut" id="date_debut" value="22/10/2015 09:36">
+							</div>
+							<div class="date-au colx2">
+								<label>au</label>
+								<input type="text" class="datepicker-jqui" name="date_fin" id="date_fin" value="22/10/2015 12:06">
+							</div>
+						</div>
+					</div>
+					<div class="select-capteur colx3">
+						<div class="margin">
+							<select name="select_capteurs" id="select_capteurs" multiple="multiple" class="multiselect-jqui">
+                                                            <option value="40" selected="selected">Temperature Externe</option> 
+                                                            <option value="41" selected="selected">Temperature Interne</option> 
+                                                    </select>
+						</div>
+					</div>
+					<div class="releves-periode-actions colx3">
+						<div class="tableau colx3" id="tableau_mesures"><div class="margin">Tableau</div></div>
+						<div class="graphe colx3" id="graphe_mesures"><div class="margin">Graphe</div></div>
+						<div class="export colx3" id="export_mesures"><div class="margin">Export</div></div>
+					</div>
+					<div class="clear"></div>
+                                    </form>
+				</div>
+				<!-- / PERIODE & INFOS -->
+
+				<!-- CAPTEURS -->
+				<div id="releves-tableau">
+                                           <div class="c-slideshow"><div class="main"><div class="margin"><h2>Aucune mesure existante pour cette période</h2></div></div></div>
+
+    				</div>
+				<!-- / CAPTEURS -->
+				
+				<!-- GRAPHE CAPTEURS -->
+                                <!-- / GRAPHE CAPTEURS -->
+				
+			</div>
+			<!-- / CONTAINER RELEVÉS -->
+			
+			<!-- CONTAINER INFORMATIONS STATION -->
+			<div id="container-infos-station">
+                        <!-- INFORMATIONS CAPTEURS DE LA STATION -->
+                                {% for capteur in capteurs %}
+				<div id="infos-station-capteurs">
+					<div class="infos-station-capteur">
+						<div class="isc isc-nom colx8"><div class="margin"><strong>Capteur</strong><br /><strong>{{ capteur.nom }}</strong></div></div>
+                                                <div class="isc isc-mesure colx8"><div class="margin">Date<br /><strong>Date de la derniere mesure</strong></div></div>
+                                                <div class="isc isc-mesure colx8"><div class="margin">Derniere mesure<br /><strong>Aucune</strong></div></div>
+						<div class="isc isc-unite colx8"><div class="margin">Unité<br /><strong>{{ capteur.unite.valeur }}</strong></div></div>
+                                                <div class="isc isc-seuil colx8"><div class="margin">Seuil pré-alerte<br /><strong>{{ capteur.seuilPreAlerte }}&nbsp;</strong></div></div>
+						<div class="isc isc-seuil colx8"><div class="margin">Seuil alerte<br /><strong>{{ capteur.seuilAlerte }}&nbsp;</strong></div></div>
+                                                <div class="clear"></div>
+					</div>
+				</div>
+                                {% endfor %}
+				<!-- / INFORMATIONS CAPTEURS DE LA STATION -->
+				<div id="infos-station-multimedia">
+                                <!-- PHOTOS DE LA STATION -->
+					<div id="infos-station-photos" class="c-slideshow">
+						<div class="main">
+							<div class="margin">
+								<h2>Photos</h2>
+								<div class="download"><a href="http://paratronic.doplus.pro/ressources/tmp-zip-photos/photos_stations_20151022_120632.zip" target="_blank">Télécharger (.zip)</a></div>								<ul id="bxslider-photos" class="slideshow">
+                                                                <li><img src="http://paratronic.doplus.pro/ressources/stations/1/photos/LNS_DEMO_image_20150701_174600_1180x784.jpg"></li>                                                                    									<li><img src="http://paratronic.doplus.pro/ressources/stations/1/photos/LNS_DEMO_image_20150701_164600_1180x784.jpg"></li>                                                                    									<li><img src="http://paratronic.doplus.pro/ressources/stations/1/photos/LNS_DEMO_image_20150701_154600_1180x784.jpg"></li>                                                                    									<li><img src="http://paratronic.doplus.pro/ressources/stations/1/photos/LNS_DEMO_image_20150701_231500_1180x784.jpg"></li>                                                                    									<li><img src="http://paratronic.doplus.pro/ressources/stations/1/photos/LNS_DEMO_image_20150701_230000_1180x784.jpg"></li>                                                                    								</ul>
+
+								<div class="outside">
+									<div id="slider-prev-photos" class="outside-element prev"></div>
+									<div id="pager-photos" class="outside-element pager"></div>
+									<div id="slider-next-photos" class="outside-element next"></div>
+									<div class="clear"></div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<!-- / PHOTOS DE LA STATION -->
+                                </div>
+				
+			</div>
+			<!-- / CONTAINER INFORMATIONS STATION -->
+{% endblock %}
