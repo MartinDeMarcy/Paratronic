@@ -1,15 +1,17 @@
 <?php
 
-namespace Doplus\ParatronicBundle\Form\Type;
+namespace Doplus\UserBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 
-class RegistrationFormType extends AbstractType {
-    
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder
-                ->add('nom', 'text')
+class RegistrationFormType extends BaseType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        $builder->add('nom', 'text')
                 ->add('prenom', 'text')
                 ->add('image', 'file', array(
                     'required' => false,
@@ -20,7 +22,7 @@ class RegistrationFormType extends AbstractType {
                 ->add('telephone', 'text', array(
                     'required' => false,
                 ))
-                ->add('mail', 'email')
+                ->add('email', 'email')
                 ->add('alerte', 'choice', array(
                     'choices' => array('1' => 'Oui', '0' => 'Non'),
                     'expanded' => true,
@@ -43,14 +45,11 @@ class RegistrationFormType extends AbstractType {
                 ->add('droits', 'choice', array(
                     'choices' => array('0' => 'Lecture seule', '1' => 'Ajout / modification'),
                 ))
-                ->getForm()
-        ;
+            ;
     }
-//    public function getParent() {
-//        return 'fos_user_registration';
-//    }
-    
-    public function getName() {
+
+    public function getName()
+    {
         return 'doplus_user_registration';
     }
 }

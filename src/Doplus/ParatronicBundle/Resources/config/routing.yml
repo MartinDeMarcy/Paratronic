@@ -111,13 +111,3 @@ doplus_paratronic_test:
     path:    /test
     defaults: { _controller: DoplusParatronicBundle:Admin:test }
     
-#login
-login:
-    pattern:    /login
-    defaults: { _controller: DoplusUserBundle:Security:login }
-    
-login_check:
-    pattern:    /login_check
-    
-logout:
-    pattern:    /logout

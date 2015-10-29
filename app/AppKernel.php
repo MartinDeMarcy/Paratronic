@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
             new Doplus\UserBundle\DoplusUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,4 +1,6 @@
 services:
-#    doplus_user.example:
-#        class: Doplus\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    doplus_user.registration.form.type:
+        class: Doplus\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: doplus_user_registration }

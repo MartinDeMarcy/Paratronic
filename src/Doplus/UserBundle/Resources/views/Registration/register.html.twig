@@ -1,0 +1,171 @@
+{% extends "DoplusParatronicBundle::layout.html.twig" %}
+
+{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block content %}
+    <div id="user-infos">
+            <h1>{% if user.username %}Modifier {% else %}Ajouter {% endif %}utilisateur</h1>
+            {% if form_errors(form.email) != NULL or form_errors(form.username) != NULL or form_errors(form.image) != NULL %}
+                <section id="messages" class="error">
+                        <div class="margin">
+                                <p>{{ form_errors(form.email) }}</p>
+                                <p>{{ form_errors(form.username) }}</p>
+                                <p>{{ form_errors(form.image) }}</p>
+                        </div>				
+                        <div class="clear"></div>
+                </section>
+            {% endif %}
+                        {{ form_start(form, {'id': "form-user-action", 'attr': {'class': 'form-horizontal'}}) }}
+                            <div id="user-infos-form" class="col2-3">
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.nom, "Nom *") }}
+                                        {{ form_widget(form.nom, {'id': 'nom'}) }}
+                                    </div>
+                            </div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.prenom, "Prénom *") }}
+                                        {{ form_widget(form.prenom, {'id': 'prenom'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.fonction, "Fonction") }}
+                                        {{ form_widget(form.fonction, {'id': 'fonction'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.image, "Photo (150x150)") }}
+                                        {{ form_widget(form.image, {'id': 'image'}) }}
+                                    </div>
+                            </div>
+                            <!-- ATTENTION - la div ci-dessous est à positionner quoi qu'il arrive après le champs d'ajout de photo -->
+                            <div class="colx3 col-picture">
+                                <div class="margin">
+                                    {% if user.pathImage %}
+                                        <label for="user-edit-photo">Photo existante</label>
+                                        <div class="user-infos-picture">
+                                                <img src="{{ asset(user.getWebPath()) }}" height="70" />
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- ATTENTION - respecter les classes colx3 et col-picture pour la zone photo existante -->
+
+                                                    <!-- ATTENTION - toujours ajouter un clear après la photo et redémarrer l'imprication normalement -->
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.telephone, "Téléphone") }}
+                                        {{ form_widget(form.telephone, {'id': 'telephone'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.email, "Mail *") }}
+                                        {{ form_widget(form.email, {'id': 'email'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                            {{ form_label(form.alerte, "Alerte") }}
+                                            <div class="option-check-rad">
+                                                {{ form_widget(form.alerte, {'id': 'alerte'}) }}
+                                            </div>
+                                            <div class="clear"></div>
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.niveauAlerte, "Ordre alerte") }}
+                                        {{ form_widget(form.niveauAlerte, {'id': 'niveauAlerte'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="colx2">
+                                     <div class="margin">
+                                        {{ form_label(form.username, "Login *") }}
+                                        {{ form_widget(form.username, {'id': 'username'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.plainPassword.first, "Mot de passe *") }}
+                                        {{ form_widget(form.plainPassword.first, {'id': 'plainPassword'}) }}
+                                    </div>
+                            </div>
+
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.client, "Client *") }}
+                                        {{ form_widget(form.client, {'id': 'client', 'attr': {'class': 'selectmenu-jqui'}}) }}
+                                    </div>
+                            </div>
+
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.etat, "Etat") }}
+                                        <div class="checkbox">
+                                            Actif{{ form_widget(form.etat, {'id': 'etat'}) }}
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                            </div>
+
+                            <div class="clear"></div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                            {{ form_label(form.droits, "Droits") }}
+                                            {{ form_widget(form.droits, {'id': 'droits', 'attr': {'class': 'selectmenu-jqui'}}) }}
+                                    </div>
+                            </div>
+
+                            <p>
+                                <input type="hidden" name="id" value="" />
+                            </p>
+
+
+            </div>
+
+                    <div class="clear"></div>
+                    <div id="user-edit-form">
+
+                                    <div class="colx2">
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Annuler" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}';">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="valider_utilisateur" value="Valider">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                            <input type="submit" name="suppr_utilisateur" value="Supprimer">
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="clear"></div>
+
+                    </div>	
+
+
+    </div>
+                                                        {{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

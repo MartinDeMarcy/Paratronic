@@ -86,3 +86,10 @@ genemu_form:
     date: ~
     
 # fosuserbundle config
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class:    Doplus\UserBundle\Entity\Utilisateur
+    registration:
+        form:
+            type: doplus_user_registration
