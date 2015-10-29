@@ -53,20 +53,23 @@
 
 
 	<body class="front">
-                            <header id="header">
+            {% if is_granted('ROLE_USER') %}
+                <header id="header">
 			<!-- USER MENU - logged only -->
 			<div id="user-menu">
 				<div class="margin">
 					<div class="user-menu-infos colx3">
                                             <div class="c-user-nom-societe">
-						<div class="user-nom">Admin Admin</div>
-						<div class="user-societe">Paratronic</div>
+						<div class="user-nom"> {{ app.user.username }} </div>
+						<div class="user-societe"></div>
                                             </div>
 					</div>
 					<div class="user-menu-link col2-3">
-						<div class="user-logout colx6"><a href="">Déconnexion</a></div>
+                                            
+						<div class="user-logout colx6"><a href="{{ path('logout') }}">Déconnexion</a></div>
 						<div class="user-config colx6"><a href="{{ path('doplus_paratronic_admin_menu') }}">Administration</a></div>
                                                 <div class="home-carto colx6"><a href="{{ path('doplus_paratronic_home_index') }}">Cartographie</a></div>
+                                            
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -90,6 +93,10 @@
 				<div class="clear"></div>
 			</div>
 			<!-- / CLIENT & STATION -->
+                        
+                        {% else %}
+                            {% render controller("DoplusUserBundle:Security:login") %}
+                        {% endif %}
                         
                 <div id="content">{% block content %}{% endblock %}</div>
                 <div class="clear"></div>

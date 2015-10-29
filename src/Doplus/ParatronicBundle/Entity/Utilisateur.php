@@ -5,8 +5,7 @@ namespace Doplus\ParatronicBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use FOS\UserBundle\Model\User as BaseUser;
+
 
 /**
  * Utilisateur
@@ -15,7 +14,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Entity(repositoryClass="Doplus\ParatronicBundle\Repository\UtilisateurRepository")
  * 
  */
-class Utilisateur extends BaseUser
+class Utilisateur
 {
     /**
      * @var integer
@@ -47,14 +46,14 @@ class Utilisateur extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
 
@@ -75,7 +74,7 @@ class Utilisateur extends BaseUser
     /**
      * @var choice
      *
-     * @ORM\Column(name="droits", type="integer")
+     * @ORM\Column(name="droits", type="integer", nullable=true)
      * @Assert\Choice(choices = {"0", "1"})
      */
     private $droits;
@@ -83,7 +82,7 @@ class Utilisateur extends BaseUser
     /**
      * @var choice
      *
-     * @ORM\Column(name="alerte", type="integer")
+     * @ORM\Column(name="alerte", type="integer", nullable=true)
      * @Assert\Choice(choices = {"0", "1"})
      */
     private $alerte;
@@ -98,7 +97,7 @@ class Utilisateur extends BaseUser
     /**
      * @var bool
      *
-     * @ORM\Column(name="etat", type="boolean")
+     * @ORM\Column(name="etat", type="boolean", nullable=true)
      */
     private $etat;
 

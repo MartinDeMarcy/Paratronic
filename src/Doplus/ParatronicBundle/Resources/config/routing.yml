@@ -22,7 +22,7 @@ doplus_paratronic_admin_ajout_client:
     defaults: { _controller: DoplusParatronicBundle:Admin:ajoutClient }
     
 doplus_paratronic_admin_edit_client:
-    path:    /admin/edit_client/{id}
+    path:    /admin/edit/client/{id}
     defaults: { _controller: DoplusParatronicBundle:Admin:editClient }
     
 doplus_paratronic_admin_delete_client:
@@ -36,7 +36,7 @@ doplus_paratronic_admin_ajout_user:
     defaults: { _controller: DoplusParatronicBundle:Admin:ajoutUser }
     
 doplus_paratronic_admin_edit_user:
-    path:    /admin/edit_user/{id}
+    path:    /admin/edit/user/{id}
     defaults: { _controller: DoplusParatronicBundle:Admin:editUser }
     
 doplus_paratronic_admin_delete_user:
@@ -54,7 +54,7 @@ doplus_paratronic_admin_ajout_station:
     defaults: { _controller: DoplusParatronicBundle:Admin:ajoutStation }
     
 doplus_paratronic_admin_edit_station:
-    path:    /admin/edit_station/{id}
+    path:    /admin/edit/station/{id}
     defaults: { _controller: DoplusParatronicBundle:Admin:editStation }
     
 doplus_paratronic_admin_delete_station:
@@ -111,6 +111,13 @@ doplus_paratronic_test:
     path:    /test
     defaults: { _controller: DoplusParatronicBundle:Admin:test }
     
-#login:
-#    path:    /login
-#    defaults: { _controller: DoplusParatronicBundle:Home:login }
+#login
+login:
+    pattern:    /login
+    defaults: { _controller: DoplusUserBundle:Security:login }
+    
+login_check:
+    pattern:    /login_check
+    
+logout:
+    pattern:    /logout

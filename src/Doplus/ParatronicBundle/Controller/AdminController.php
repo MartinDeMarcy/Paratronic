@@ -5,13 +5,12 @@ namespace Doplus\ParatronicBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doplus\ParatronicBundle\Entity\Client;
-use Doplus\ParatronicBundle\Entity\File;
 use Doplus\ParatronicBundle\Entity\ParametreAbonnement;
 use Doplus\ParatronicBundle\Entity\ParametreAlerte;
 use Doplus\ParatronicBundle\Entity\ParametreLimitation;
 use Doplus\ParatronicBundle\Form\ClientType;
 use Doplus\ParatronicBundle\Entity\Utilisateur;
-use Doplus\ParatronicBundle\Form\UserType;
+use Doplus\ParatronicBundle\Form\Type\RegistrationFormType;
 use Doplus\ParatronicBundle\Entity\Station;
 use Doplus\ParatronicBundle\Form\StationType;
 use Doplus\ParatronicBundle\Entity\Search\ClientSearch;
@@ -54,8 +53,6 @@ class AdminController extends Controller
             $client->setNbUtilisateurs(0);
             $client->setNbStations(0);
             $client->upload();
-//            var_dump($client);
-//                        var_dump($client->getImage());exit();
             $em->persist($parametreAbonnement);
             $em->persist($parametreAlerte);
             $em->persist($parametreLimitation);
@@ -79,7 +76,6 @@ class AdminController extends Controller
         if ($formClient->isValid()) {
             if ($formClient->getData()->getImage() != NULL) {
                 $new_image = $client->getCodeClient().'_client-picture_'.$formClient->getViewData()->getImage()->getClientOriginalName();
-    //            echo $new_image."<br>".$client->getPathImage();exit();
                 if ($new_image != $client->getPathImage()) {
                     $client->removeFile($client->getPathImage());
                 }
@@ -130,7 +126,7 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = new Utilisateur();
-        $formUser = $this->createForm(new UserType(), $user);
+        $formUser = $this->createForm(new RegistrationFormType(), $user);
         $formUser->handleRequest($request);
         if ($formUser->isValid()) {
             $user->getClient()->addUtilisateur();
@@ -151,7 +147,7 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('DoplusParatronicBundle:Utilisateur')->find($id);
-        $formUser = $this->createForm(new UserType(), $user);
+        $formUser = $this->createForm(new RegistrationFormType(), $user);
         $formUser->handleRequest($request);
         if ($formUser->isValid()) {
             if ($formUser->getData()->getImage() != NULL) {
@@ -266,10 +262,13 @@ class AdminController extends Controller
         ));
     }
     
-    public function testAction(Request $request)
+    public function testAction()
     {
         $em = $this->getDoctrine()->getManager();
-        
+        $user = new \Doplus\UserBundle\Entity\Utilisateur();
+        $user->setRoles(array('ROLE_USER'));
+        $em->persist($user);
+        $em->flush();
         return $this->render('DoplusParatronicBundle:Admin:test.html.twig');
     }
 

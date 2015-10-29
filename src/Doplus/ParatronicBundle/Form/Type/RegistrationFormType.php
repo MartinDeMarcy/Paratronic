@@ -1,11 +1,11 @@
 <?php
 
-namespace Doplus\ParatronicBundle\Form;
+namespace Doplus\ParatronicBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class UserType extends AbstractType {
+class RegistrationFormType extends AbstractType {
     
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
@@ -46,8 +46,11 @@ class UserType extends AbstractType {
                 ->getForm()
         ;
     }
+//    public function getParent() {
+//        return 'fos_user_registration';
+//    }
     
     public function getName() {
-        return 'doplus_paratronic_user';
+        return 'doplus_user_registration';
     }
 }

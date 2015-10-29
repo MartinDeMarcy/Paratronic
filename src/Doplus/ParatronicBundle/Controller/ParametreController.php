@@ -37,6 +37,7 @@ class ParametreController extends Controller
         }
         return $this->render('DoplusParatronicBundle:Parametre:alerte.html.twig', array(
             'formAlerte' => $formAlerte->createView(),
+            'id' => $id
         ));
     }
     
@@ -55,6 +56,7 @@ class ParametreController extends Controller
         }
         return $this->render('DoplusParatronicBundle:Parametre:abonnement.html.twig', array(
             'formAbonnement' => $formAbonnement->createView(),
+            'id' => $id
         ));
     }
     
@@ -73,6 +75,7 @@ class ParametreController extends Controller
         }
         return $this->render('DoplusParatronicBundle:Parametre:limitation.html.twig', array(
             'formLimitation' => $formLimitation->createView(),
+            'id' => $id
         ));
 
     }

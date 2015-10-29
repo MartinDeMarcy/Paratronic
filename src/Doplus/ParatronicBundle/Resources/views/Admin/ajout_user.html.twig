@@ -166,5 +166,6 @@
 
 
     </div>
-{{ form_end(formUser) }}
+                                                        {{ form_widget(formUser._token) }}
+{{ form_end(formUser, {'render_rest': false}) }}
 {% endblock %}

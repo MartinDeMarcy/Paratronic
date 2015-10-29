@@ -41,9 +41,9 @@ class ClientSearch
     }
     
     public function isEmpty() {
-        return $this->getEntite() == null
-                && $this->getCp() == null
-                && $this->getVille() == null
+        return $this->getEntite() === null
+                && $this->getCp() === null
+                && $this->getVille() === null
         ;
     }
 }

@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Doplus\ParatronicBundle\DoplusParatronicBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+            new Doplus\UserBundle\DoplusUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
