@@ -10,7 +10,11 @@ class RegistrationFormType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-
+            $choice = array(
+                'ROLE_USER' => 'Lecture seule',
+                'ROLE_SUPER_USER' => 'Ajout / modification',
+                'ROLE_ADMIN' => 'Administration',
+                );
         $builder->add('nom', 'text')
                 ->add('prenom', 'text')
                 ->add('image', 'file', array(
@@ -37,14 +41,14 @@ class RegistrationFormType extends BaseType
                 ))
                 ->add('client', 'entity', array(
                     'class' => 'DoplusParatronicBundle:Client',
-                    'property' => 'raisonSociale'
+                    'choice_label' => 'raisonSociale'
                     ))
                 ->add('etat', 'checkbox', array(
                     'required' => false,
                     ))
                 ->add('droits', 'choice', array(
-                    'choices' => array('0' => 'Lecture seule', '1' => 'Ajout / modification'),
-                ))
+                    'choices' => $choice,
+                    ))
             ;
     }
 

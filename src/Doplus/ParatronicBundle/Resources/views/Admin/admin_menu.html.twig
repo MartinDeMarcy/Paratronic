@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="colx4">
                                                 <div class="margin">
-                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
                                                 </div>
                                         </div>
                                         <div class="colx4">
@@ -73,24 +73,36 @@
                 <!-- CLIENT INFOS USERS -->
                 <div id="liste-clients-infos">
                         {% for client in clients %}
-                        <div class="infos-client_entity" id="elementLine">
-                                <div class="client_entity entity colx7"><div class="margin"><strong>Entité</strong><br /><a href="{{ path('doplus_paratronic_admin_edit_client', {'id': client.id}) }}"><strong>{{ client.raisonSociale }}</strong></a></div></div>
-                                <div class="client_entity code-postal colx7"><div class="margin">Code postal<br />{% if client.cp %}<strong>{{ client.cp }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                <div class="client_entity ville colx7"><div class="margin">Ville<br />{% if client.ville %}<strong>{{ client.ville }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                <div class="client_entity nb-users colx7"><div class="margin">Utilisateurs<br /><a href="{{ path('doplus_paratronic_admin_user_menu', {'id': client.id}) }}"><strong>{{ client.nbUtilisateurs }}</strong></a></div></div>
-                                <div class="client_entity nb-stations colx7"><div class="margin">Stations<br /><a href="{{ path('doplus_paratronic_admin_station_menu', {'id': client.id}) }}"><strong>{{ client.nbStations }}</strong></a></div></div>
-                                <div class="client_entity nb-stations colx7"><div class="margin">Paramètres<br /><a href="{{ path('doplus_paratronic_parametre_menu', {'id': client.id}) }}"><strong>Editer</strong></a></div></div>
-                                <div class="client_entity delete colx7">
-                                        <div class="margin">
-                                                <a href="{{ path('doplus_paratronic_admin_delete_client', {'id': client.id}) }}"><strong>Supprimer</strong></a>
-                                                <form action="" method="post" accept-charset="UTF-8">
-                                                        <!-- jquery ui -->
-                                                        <input type="checkbox" id="entity-suppr2" class="button-jqui checkSuppr" value="2"><label for="entity-suppr2">&nbsp;</label>
-                                                </form>
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <div class="infos-client_entity" id="elementLine">
+                                        <div class="client_entity entity colx7"><div class="margin"><strong>Entité</strong><br /><a href="{{ path('doplus_paratronic_admin_edit_client', {'id': client.id}) }}"><strong>{{ client.raisonSociale }}</strong></a></div></div>
+                                        <div class="client_entity code-postal colx7"><div class="margin">Code postal<br />{% if client.cp %}<strong>{{ client.cp }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx7"><div class="margin">Ville<br />{% if client.ville %}<strong>{{ client.ville }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity nb-users colx7"><div class="margin">Utilisateurs<br /><a href="{{ path('doplus_paratronic_admin_user_menu', {'id': client.id}) }}"><strong>{{ client.nbUtilisateurs }}</strong></a></div></div>
+                                        <div class="client_entity nb-stations colx7"><div class="margin">Stations<br /><a href="{{ path('doplus_paratronic_admin_station_menu', {'id': client.id}) }}"><strong>{{ client.nbStations }}</strong></a></div></div>
+                                        <div class="client_entity nb-stations colx7"><div class="margin">Paramètres<br /><a href="{{ path('doplus_paratronic_parametre_menu', {'id': client.id}) }}"><strong>Editer</strong></a></div></div>
+                                        <div class="client_entity delete colx7">
+                                                <div class="margin">
+                                                        <a href="{{ path('doplus_paratronic_admin_delete_client', {'id': client.id}) }}"><strong>Supprimer</strong></a>
+                                                        <form action="" method="post" accept-charset="UTF-8">
+                                                                <!-- jquery ui -->
+                                                                <input type="checkbox" id="entity-suppr2" class="button-jqui checkSuppr" value="2"><label for="entity-suppr2">&nbsp;</label>
+                                                        </form>
+                                                </div>
                                         </div>
+                                        <div class="clear"></div>
                                 </div>
-                                <div class="clear"></div>
-                        </div>
+                            {% else %}
+                                <div class="infos-client_entity" id="elementLine">
+                                        <div class="client_entity entity colx5"><div class="margin"><strong>Entité</strong><br /><strong>{{ client.raisonSociale }}</strong></div></div>
+                                        <div class="client_entity code-postal colx5"><div class="margin">Code postal<br />{% if client.cp %}<strong>{{ client.cp }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx5"><div class="margin">Ville<br />{% if client.ville %}<strong>{{ client.ville }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity nb-users colx5"><div class="margin">Utilisateurs<br /><a href="{{ path('doplus_paratronic_admin_user_menu', {'id': client.id}) }}"><strong>{{ client.nbUtilisateurs }}</strong></a></div></div>
+                                        <div class="client_entity nb-stations colx5"><div class="margin">Stations<br /><a href="{{ path('doplus_paratronic_admin_station_menu', {'id': client.id}) }}"><strong>{{ client.nbStations }}</strong></a></div></div>
+                                        <div class="clear"></div>
+                                </div>
+                            {% endif %}
+                        
                         {% endfor %}
 
                 </div>
@@ -112,7 +124,7 @@
                                         </div>
                                         <div class="colx4">
                                                 <div class="margin">
-                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
                                                 </div>
                                         </div>
                                         <div class="colx4">

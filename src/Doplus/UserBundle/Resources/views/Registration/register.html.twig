@@ -15,6 +15,7 @@
                 </section>
             {% endif %}
                         {{ form_start(form, {'id': "form-user-action", 'attr': {'class': 'form-horizontal'}}) }}
+                        {{ form_errors(form) }}
                             <div id="user-infos-form" class="col2-3">
 
                             <div class="colx2">
@@ -99,11 +100,17 @@
                                         {{ form_widget(form.username, {'id': 'username'}) }}
                                     </div>
                             </div>
-
+                            <div class="clear"></div>
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(form.plainPassword.first, "Mot de passe *") }}
-                                        {{ form_widget(form.plainPassword.first, {'id': 'plainPassword'}) }}
+                                        {{ form_widget(form.plainPassword.first, {'id': 'plainPassword_first'}) }}
+                                    </div>
+                            </div>
+                            <div class="colx2">
+                                    <div class="margin">
+                                        {{ form_label(form.plainPassword.second, "Confirmation du mot de passe *") }}
+                                        {{ form_widget(form.plainPassword.second, {'id': 'plainPassword_second' }) }}
                                     </div>
                             </div>
 

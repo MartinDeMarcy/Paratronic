@@ -10,4 +10,13 @@ namespace Doplus\UserBundle\Entity;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findWithClientId($id) {
+        $qb = $this->createQueryBuilder('u')
+                    ->leftJoin('u.client', 'uc')
+                    ->addSelect('uc')
+                    ->where("uc.id = $id")
+                    ->orderBy('u.nom')
+                ;
+        return $qb->getQuery()->getResult();
+    }
 }

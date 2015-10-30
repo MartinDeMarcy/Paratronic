@@ -74,7 +74,7 @@ class Utilisateur extends BaseUser
      * @var choice
      *
      * @ORM\Column(name="droits", type="integer", nullable=true)
-     * @Assert\Choice(choices = {"0", "1"})
+     * @Assert\Choice(choices = {"ROLE_USER", "ROLE_SUPER_USER", "ROLE_ADMIN"})
      */
     private $droits;
 

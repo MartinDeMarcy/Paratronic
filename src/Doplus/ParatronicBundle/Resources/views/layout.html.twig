@@ -60,8 +60,8 @@
 				<div class="margin">
 					<div class="user-menu-infos colx3">
                                             <div class="c-user-nom-societe">
-						<div class="user-nom"> {{ app.user.username }} </div>
-						<div class="user-societe"></div>
+						<div class="user-nom"> {{ app.user.nom }} {{ app.user.prenom }}{% if is_granted("ROLE_ADMIN") %} | Admin {% endif %}</div>
+						<div class="user-societe">{{ app.user.client.raisonSociale }}</div>
                                             </div>
 					</div>
 					<div class="user-menu-link col2-3">

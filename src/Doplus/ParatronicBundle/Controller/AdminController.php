@@ -183,7 +183,7 @@ class AdminController extends Controller
     public function menuUserAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('DoplusParatronicBundle:Utilisateur')->findWithClientId($id);
+        $users = $em->getRepository('DoplusUserBundle:Utilisateur')->findWithClientId($id);
         $client = $em->getRepository('DoplusParatronicBundle:Client')->findOneBy(array('id' => $id));
         $name = $client->getRaisonSociale();
         return $this->render('DoplusParatronicBundle:Admin:user_menu.html.twig', array(
@@ -266,7 +266,6 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = new \Doplus\UserBundle\Entity\Utilisateur();
-        $user->setRoles(array('ROLE_USER'));
         $em->persist($user);
         $em->flush();
         return $this->render('DoplusParatronicBundle:Admin:test.html.twig');

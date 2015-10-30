@@ -1,0 +1,3 @@
+doplus_user_registration:
+    path:    /admin/edit/user
+    defaults: { _controller: DoplusUserBundle:Registration:register }

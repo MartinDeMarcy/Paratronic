@@ -16,7 +16,7 @@ class RegistrationController extends BaseController
         $formUser = $this->createForm('doplus_user_registration', $user);
         $formUser->handleRequest($request);
         if ($formUser->isValid()) {
-//            var_dump($user);exit();
+            $user->addRole($formUser->getData()->getDroits());
             $user->getClient()->addUtilisateur();
             $user->upload();
             $userManager->updateUser($user);
