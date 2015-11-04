@@ -37,21 +37,21 @@ class Mesure
     /**
      * @var string
      *
-     * @ORM\Column(name="valeur", type="string", length=255)
+     * @ORM\Column(name="valeur", type="string", length=255, nullable=true))
      */
     private $valeur;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="archive", type="integer")
+     * @ORM\Column(name="archive", type="integer", nullable=true)
      */
     private $archive;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="horodatage", type="bigint")
+     * @ORM\Column(name="horodatage", type="bigint", nullable=true))
      */
     private $horodatage;
 

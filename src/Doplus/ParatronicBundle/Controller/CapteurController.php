@@ -11,8 +11,12 @@ class CapteurController extends Controller
 {
     public function capteurMenuAction($id)
     {
+        $roleManager = $this->container->get('doplus_paratronic.rolemanager');
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $station = $em->getRepository('DoplusParatronicBundle:Station')->find($id);
+        $idClient = $station->getClient()->getId();
+        $roleManager->isUserForThisClient($idClient, $user); // verif si user aparatient au client
         $capteurs = $em->getRepository('DoplusParatronicBundle:Capteur')->findBy(array('station' => $station));
         
         return $this->render('DoplusParatronicBundle:Capteur:capteur_menu.html.twig', array(

@@ -5,8 +5,8 @@ security:
         Doplus\UserBundle\Entity\Utilisateur: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_USER:  ROLE_USER
+        ROLE_ADMIN:       ROLE_SUPER_USER
 
     providers:
         in_memory:
@@ -35,5 +35,11 @@ security:
                 target: /
 
     access_control:
-        - { path: ^/parametre , roles: ROLE_ADMIN }
-        - { path: ^/admin/edit , roles: ROLE_ADMIN }
+        - { path: ^/parametre/alerte , roles: ROLE_SUPER_USER }
+        - { path: ^/register , roles: ROLE_SUPER_USER }
+        - { path: ^/admin/delete_station , roles: ROLE_SUPER_USER }
+        - { path: ^/admin/edit/station , roles: ROLE_SUPER_USER }
+        - { path: ^/parametre/limitation , roles: ROLE_ADMIN }
+        - { path: ^/parametre/abonnement , roles: ROLE_ADMIN }
+        - { path: ^/admin/edit/user , roles: ROLE_SUPER_USER }
+        - { path: ^/capteur/edit , roles: ROLE_SUPER_USER }

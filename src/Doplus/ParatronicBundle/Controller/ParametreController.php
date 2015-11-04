@@ -13,6 +13,9 @@ class ParametreController extends Controller
 {
     public function indexAction($id)
     {
+        $roleManager = $this->container->get('doplus_paratronic.rolemanager');
+        $user = $this->getUser();
+        $roleManager->isUserForThisClient($id, $user); // verif si user aparatient au client
         $em = $this->getDoctrine()->getManager();
         $client = $em->getRepository('DoplusParatronicBundle:Client')->findOneBy(array('id' => $id));
         $name = $client->getRaisonSociale();

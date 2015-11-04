@@ -4,12 +4,13 @@
 {% block content %}
     <div id="user-infos">
             <h1>{% if station.nom %}Modifier {% else %}Ajouter {% endif %}station</h1>
-            {% if form_errors(formStation.nom) != NULL or form_errors(formStation.codeHydrologique) != NULL or form_errors(formStation.image) != NULL %}
+            {% if form_errors(formStation.nom) or form_errors(formStation.codeHydrologique) or form_errors(formStation.image) or error %}
                 <section id="messages" class="error">
                         <div class="margin">
                                 <p>{{ form_errors(formStation.nom) }}</p>
                                 <p>{{ form_errors(formStation.codeHydrologique) }}</p>
                                 <p>{{ form_errors(formStation.image) }}</p>
+                                <p>{{ error }}</p>
                         </div>				
                         <div class="clear"></div>
                 </section>

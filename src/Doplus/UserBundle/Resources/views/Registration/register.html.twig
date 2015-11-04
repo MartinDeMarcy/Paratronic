@@ -3,13 +3,11 @@
 {% block title %} Accueil |{{ parent() }} {% endblock %}
 {% block content %}
     <div id="user-infos">
-            <h1>{% if user.username %}Modifier {% else %}Ajouter {% endif %}utilisateur</h1>
-            {% if form_errors(form.email) != NULL or form_errors(form.username) != NULL or form_errors(form.image) != NULL %}
+            <h1>{% if tmp != "ajout" %}Modifier {% else %}Ajouter {% endif %}utilisateur</h1>
+            {% if error %}
                 <section id="messages" class="error">
                         <div class="margin">
-                                <p>{{ form_errors(form.email) }}</p>
-                                <p>{{ form_errors(form.username) }}</p>
-                                <p>{{ form_errors(form.image) }}</p>
+                                <p>{{ error }}</p>
                         </div>				
                         <div class="clear"></div>
                 </section>
@@ -22,12 +20,14 @@
                                     <div class="margin">
                                         {{ form_label(form.nom, "Nom *") }}
                                         {{ form_widget(form.nom, {'id': 'nom'}) }}
+                                        {{ form_errors(form.nom) }}
                                     </div>
                             </div>
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(form.prenom, "Prénom *") }}
                                         {{ form_widget(form.prenom, {'id': 'prenom'}) }}
+                                        {{ form_errors(form.prenom) }}
                                     </div>
                             </div>
 
@@ -37,6 +37,7 @@
                                     <div class="margin">
                                         {{ form_label(form.fonction, "Fonction") }}
                                         {{ form_widget(form.fonction, {'id': 'fonction'}) }}
+                                        {{ form_errors(form.fonction) }}
                                     </div>
                             </div>
 
@@ -44,6 +45,7 @@
                                     <div class="margin">
                                         {{ form_label(form.image, "Photo (150x150)") }}
                                         {{ form_widget(form.image, {'id': 'image'}) }}
+                                        {{ form_errors(form.image) }}
                                     </div>
                             </div>
                             <!-- ATTENTION - la div ci-dessous est à positionner quoi qu'il arrive après le champs d'ajout de photo -->
@@ -65,6 +67,7 @@
                                     <div class="margin">
                                         {{ form_label(form.telephone, "Téléphone") }}
                                         {{ form_widget(form.telephone, {'id': 'telephone'}) }}
+                                        {{ form_errors(form.telephone) }}
                                     </div>
                             </div>
 
@@ -72,6 +75,7 @@
                                     <div class="margin">
                                         {{ form_label(form.email, "Mail *") }}
                                         {{ form_widget(form.email, {'id': 'email'}) }}
+                                        {{ form_errors(form.email) }}
                                     </div>
                             </div>
 
@@ -80,6 +84,7 @@
                                             {{ form_label(form.alerte, "Alerte") }}
                                             <div class="option-check-rad">
                                                 {{ form_widget(form.alerte, {'id': 'alerte'}) }}
+                                                {{ form_errors(form.alerte) }}
                                             </div>
                                             <div class="clear"></div>
                                     </div>
@@ -89,6 +94,7 @@
                                     <div class="margin">
                                         {{ form_label(form.niveauAlerte, "Ordre alerte") }}
                                         {{ form_widget(form.niveauAlerte, {'id': 'niveauAlerte'}) }}
+                                        {{ form_errors(form.niveauAlerte) }}
                                     </div>
                             </div>
 
@@ -98,27 +104,33 @@
                                      <div class="margin">
                                         {{ form_label(form.username, "Login *") }}
                                         {{ form_widget(form.username, {'id': 'username'}) }}
+                                        {{ form_errors(form.username) }}
                                     </div>
                             </div>
                             <div class="clear"></div>
+                            {% if tmp != "ajout" %}
+                            {% else %}
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(form.plainPassword.first, "Mot de passe *") }}
                                         {{ form_widget(form.plainPassword.first, {'id': 'plainPassword_first'}) }}
+                                        {{ form_errors(form.plainPassword.first) }}
                                     </div>
                             </div>
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(form.plainPassword.second, "Confirmation du mot de passe *") }}
                                         {{ form_widget(form.plainPassword.second, {'id': 'plainPassword_second' }) }}
+                                        {{ form_errors(form.plainPassword.second) }}
                                     </div>
                             </div>
-
+                            {% endif %}
                             <div class="clear"></div>
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(form.client, "Client *") }}
                                         {{ form_widget(form.client, {'id': 'client', 'attr': {'class': 'selectmenu-jqui'}}) }}
+                                        {{ form_errors(form.client) }}
                                     </div>
                             </div>
 
@@ -127,6 +139,7 @@
                                         {{ form_label(form.etat, "Etat") }}
                                         <div class="checkbox">
                                             Actif{{ form_widget(form.etat, {'id': 'etat'}) }}
+                                            {{ form_errors(form.etat) }}
                                         </div>
                                         <div class="clear"></div>
                                     </div>
@@ -137,6 +150,7 @@
                                     <div class="margin">
                                             {{ form_label(form.droits, "Droits") }}
                                             {{ form_widget(form.droits, {'id': 'droits', 'attr': {'class': 'selectmenu-jqui'}}) }}
+                                            {{ form_errors(form.droits) }}
                                     </div>
                             </div>
 
@@ -173,6 +187,6 @@
 
 
     </div>
-                                                        {{ form_widget(form._token) }}
+    {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

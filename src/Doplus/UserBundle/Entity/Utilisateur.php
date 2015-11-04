@@ -6,12 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Utilisateur
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Doplus\UserBundle\Entity\UtilisateurRepository")
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  */
 class Utilisateur extends BaseUser
 {

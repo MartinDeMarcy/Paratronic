@@ -99,14 +99,14 @@
                                         {{ form_widget(formUser.username, {'id': 'username'}) }}
                                     </div>
                             </div>
-
+                                    {% if user.username %}
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(formUser.password, "Mot de passe *") }}
                                         {{ form_widget(formUser.password, {'id': 'password'}) }}
                                     </div>
                             </div>
-
+                                    {% endif %}
                             <div class="clear"></div>
                             <div class="colx2">
                                     <div class="margin">

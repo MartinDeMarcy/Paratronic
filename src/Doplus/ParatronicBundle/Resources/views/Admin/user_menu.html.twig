@@ -16,16 +16,18 @@
                                                     <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}';">
                                                 </div>
                                         </div>
-                                        <div class="colx3">
-                                                <div class="margin">
-                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
-                                                </div>
-                                        </div>
-                                        <div class="colx3">
-                                                <div class="margin">
-                                                    <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
-                                                </div>
-                                        </div>
+                                        {% if is_granted("ROLE_SUPER_USER") %}
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
+                                                    </div>
+                                            </div>
+                                        {% endif %}
                                 </div>
                                 <div class="clear"></div>
                         </form>
@@ -35,6 +37,7 @@
                 <!-- CLIENT INFOS USERS -->
                 <div id="liste-clients-infos">
                         {% for user in users %}
+                            {% if is_granted("ROLE_ADMIN") %}
                         <div class="infos-client_entity" id="elementLine">
                                 <div class="client_entity entity colx7"><div class="margin"><strong>Nom</strong><br /><a href="{{ path('doplus_paratronic_admin_edit_user', {'id': user.id}) }}"><strong>{{ user.nom }} {{ user.prenom }}</strong></a></div></div>
                                 <div class="client_entity colx7"><div class="margin">Fonction<br />{% if user.fonction %}<strong>{{ user.fonction }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
@@ -54,6 +57,21 @@
                                 </div>
                         <div class="clear"></div>
                         </div>
+                            {% else %}
+                                <div class="infos-client_entity" id="elementLine">
+                                    {% if is_granted("ROLE_SUPER_USER") %}
+                                        <div class="client_entity entity colx6"><div class="margin"><strong>Nom</strong><br /><a href="{{ path('doplus_paratronic_admin_edit_user', {'id': user.id}) }}"><strong>{{ user.nom }} {{ user.prenom }}</strong></a></div></div>
+                                    {% else %}
+                                        <div class="client_entity entity colx6"><div class="margin"><strong>Nom</strong><br /><strong>{{ user.nom }} {{ user.prenom }}</strong></div></div>
+                                    {% endif %}    
+                                    <div class="client_entity colx6"><div class="margin">Fonction<br />{% if user.fonction %}<strong>{{ user.fonction }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                    <div class="client_entity colx6"><div class="margin">Email<br /><strong>{{ user.email }}</strong></div></div>
+                                    <div class="client_entity colx6"><div class="margin">Mobile<br />{% if user.telephone %}<strong>{{ user.telephone }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                    <div class="client_entity colx6"><div class="margin">Alerte<br /><strong>{% if user.alerte == 1 %}Oui({{ user.niveauAlerte }}){% else %}Non{% endif %}</strong></div></div>
+                                    <div class="client_entity colx6"><div class="margin">Etat<br /><strong>{% if user.etat == 1%}Actif{% else %}Inactif{% endif %}</strong></div></div>
+                                    <div class="clear"></div>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                                                                     
 
@@ -69,23 +87,27 @@
                                                     <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_menu') }}';">
                                                 </div>
                                         </div>
-                                        <div class="colx3">
-                                                <div class="margin">
-                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
-                                                </div>
-                                        </div>
-                                        <div class="colx3">
-                                                <div class="margin">
-                                                    <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
-                                                </div>
-                                        </div>
+                                        {% if is_granted("ROLE_SUPER_USER") %}
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
+                                                    </div>
+                                            </div>
+                                            <div class="colx3">
+                                                    <div class="margin">
+                                                        <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
+                                                    </div>
+                                            </div>
+                                        {% endif %}
                                 </div>
                                 <div class="sep colx3">&nbsp;</div>
-                                <div class="colx6">
-                                        <div class="margin">
-                                                <input type="button" value="Suppr. sélection" onclick="javascript:supprSelection('utilisateur');">
-                                        </div>
-                                </div>
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <div class="colx6">
+                                            <div class="margin">
+                                                    <input type="button" value="Suppr. sélection" onclick="javascript:supprSelection('utilisateur');">
+                                            </div>
+                                    </div>
+                                {% endif %}
                             <div class="clear"></div>
                         </form>
                 </div>			

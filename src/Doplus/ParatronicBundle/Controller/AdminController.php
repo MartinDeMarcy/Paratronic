@@ -15,21 +15,33 @@ use Doplus\ParatronicBundle\Entity\Station;
 use Doplus\ParatronicBundle\Form\StationType;
 use Doplus\ParatronicBundle\Entity\Search\ClientSearch;
 use Doplus\ParatronicBundle\Form\SearchType\ClientSearchType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AdminController extends Controller
 {
+    /**
+     * 
+     * @Security("has_role('ROLE_USER')")
+     */
     public function adminMenuAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $clients = $em->getRepository('DoplusParatronicBundle:Client')->ClientMenu();
         $clientSearch = new ClientSearch();
         $formClientSearch = $this->createForm(new ClientSearchType(), $clientSearch);
         $formClientSearch->handleRequest($request);
-        if ($formClientSearch->isValid()) {
-            $tmp = $this->getDoctrine()->getRepository('DoplusParatronicBundle:Client')->ClientSearch($clientSearch);
-            if ($tmp != NULL) {
-                $clients = $tmp;
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $em = $this->getDoctrine()->getManager();
+            $clients = $em->getRepository('DoplusParatronicBundle:Client')->ClientMenuAdmin();
+            if ($formClientSearch->isValid()) {
+                $tmp = $this->getDoctrine()->getRepository('DoplusParatronicBundle:Client')->ClientSearch($clientSearch);
+                if ($tmp != NULL) {
+                    $clients = $tmp;
+                }
             }
+        }
+        else {
+            $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $clients = $em->getRepository('DoplusParatronicBundle:Client')->ClientMenuUser($user->getClient()->getId());
         }
         return $this->render('DoplusParatronicBundle:Admin:admin_menu.html.twig', array(
             'clients' => $clients,
@@ -145,9 +157,11 @@ class AdminController extends Controller
     
     public function editUserAction($id, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('DoplusParatronicBundle:Utilisateur')->find($id);
-        $formUser = $this->createForm(new RegistrationFormType(), $user);
+        $tmp = NULL;
+        $error = NULL;
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('id' => $id));
+        $formUser = $this->createForm('doplus_user_registration', $user);
         $formUser->handleRequest($request);
         if ($formUser->isValid()) {
             if ($formUser->getData()->getImage() != NULL) {
@@ -157,31 +171,34 @@ class AdminController extends Controller
                 }
             }
             $user->upload();
-            $em->persist($user);
-            $em->flush();
+            $userManager->updateUser($user);
             $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien modifié.');
             return $this->redirect($this->generateUrl('doplus_paratronic_admin_user_menu', array('id' => $user->getClient()->getId())));
         }
-        return $this->render('DoplusParatronicBundle:Admin:ajout_user.html.twig', array(
-            'formUser' => $formUser->createView(),
-            'user' => $user
+        return $this->render('DoplusUserBundle:Registration:register.html.twig', array(
+            'form' => $formUser->createView(),
+            'user' => $user,
+            'tmp' => $tmp,
+            'error' => $error
         ));
     }
     
     public function deleteUserAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('DoplusParatronicBundle:Utilisateur')->find($id);
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('id' => $id));
         $user->getClient()->deleteUtilisateur();
         $clientId = $user->getClient()->getId();
         $user->removeFile($user->getPathImage());
-        $em->remove($user);
-        $em->flush();
+        $userManager->deleteUser($user);
         return $this->redirect($this->generateUrl('doplus_paratronic_admin_user_menu', array('id' => $clientId)));
     }
     
     public function menuUserAction($id)
     {
+        $roleManager = $this->container->get('doplus_paratronic.rolemanager');
+        $user = $this->getUser();
+        $roleManager->isUserForThisClient($id, $user); // verif si user aparatient au client
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('DoplusUserBundle:Utilisateur')->findWithClientId($id);
         $client = $em->getRepository('DoplusParatronicBundle:Client')->findOneBy(array('id' => $id));
@@ -194,22 +211,32 @@ class AdminController extends Controller
     
     public function ajoutStationAction(Request $request)
     {
+        $error = NULL;
         $em = $this->getDoctrine()->getManager();
         $station = new Station();
         $formStation = $this->createForm(new StationType(), $station);
         $formStation->handleRequest($request);
         if ($formStation->isValid()) {
-            $station->getClient()->addStation();
-            $station->upload();
-            $station->setNbCapteurs(0);
-            $em->persist($station);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Station bien enregistré.');
-            return $this->redirect($this->generateUrl('doplus_paratronic_admin_station_menu', array('id' => $station->getClient()->getId())));
+            $nbStations = $formStation->getData()->getClient()->getNbstations();
+            $idClient = $formStation->getData()->getClient()->getId();
+            $limitation = $em->getRepository('DoplusParatronicBundle:ParametreLimitation')->findByClient($idClient);
+            if ($nbStations >= $limitation[0]->getNbStations() && $limitation[0]->getNbStations() != NULL) {
+                $error = "Le nombre maximal de station pour ce client a été atteint !";
+            }
+            else {
+                $station->getClient()->addStation();
+                $station->upload();
+                $station->setNbCapteurs(0);
+                $em->persist($station);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add('notice', 'Station bien enregistré.');
+                return $this->redirect($this->generateUrl('doplus_paratronic_admin_station_menu', array('id' => $station->getClient()->getId())));
+            }
         }
         return $this->render('DoplusParatronicBundle:Admin:ajout_station.html.twig', array(
             'formStation' => $formStation->createView(),
-            'station' => $station
+            'station' => $station,
+            'error' => $error
         ));
     }
     
@@ -240,11 +267,14 @@ class AdminController extends Controller
     
     public function deleteStationAction($id)
     {
+        $roleManager = $this->container->get('doplus_paratronic.rolemanager');
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $station = $em->getRepository('DoplusParatronicBundle:Station')->find($id);
-        $station->getClient()->deleteStation();
         $clientId = $station->getClient()->getId();
+        $roleManager->isUserForThisClient($clientId, $user); // verif si user aparatient au client
         $station->removeFile($station->getPathImage());
+        $station->getClient()->deleteStation();
         $em->remove($station);
         $em->flush();
         return $this->redirect($this->generateUrl('doplus_paratronic_admin_station_menu', array('id' => $clientId)));
@@ -252,6 +282,9 @@ class AdminController extends Controller
     
     public function menuStationAction($id)
     {
+        $roleManager = $this->container->get('doplus_paratronic.rolemanager');
+        $user = $this->getUser();
+        $roleManager->isUserForThisClient($id, $user); // verif si user aparatient au client
         $em = $this->getDoctrine()->getManager();
         $stations = $em->getRepository('DoplusParatronicBundle:Station')->findWithClientId($id);
         $client = $em->getRepository('DoplusParatronicBundle:Client')->findOneBy(array('id' => $id));

@@ -2,6 +2,7 @@
 
 {% block title %} Accueil |{{ parent() }} {% endblock %}
 {% block content %}
+    {% if is_granted("ROLE_ADMIN") %}
     <div id="search-clients-form">
                     {{ form_start(formClientSearch, {'attr': {'class': 'form-horizontal', 'name': 'formClientSearch'}}) }}
                     {{ form_errors(formClientSearch) }}
@@ -33,6 +34,7 @@
                         <div class="clear"></div>
                 {{ form_end(formClientSearch) }}
         </div>
+    {% endif %}
         <!-- / CLIENTS SEARCH -->
                 <!-- / CLIENTS INFOS -->
         <div id="clients-infos">
@@ -48,11 +50,14 @@
                                                     <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_home_index') }}';">
                                                 </div>
                                         </div>
+                                        {% if is_granted("ROLE_SUPER_USER") %}
+                                            {% if is_granted("ROLE_ADMIN") %}
                                         <div class="colx4">
                                                 <div class="margin">
                                                     <input type="button" value="Ajout client" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_client') }}';">
                                                 </div>
                                         </div>
+                                            {% endif %}
                                         <div class="colx4">
                                                 <div class="margin">
                                                     <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
@@ -63,7 +68,7 @@
                                                     <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
                                                 </div>
                                         </div>
-                                                                                
+                                        {% endif %}                                       
                                 </div>
                                 <div class="clear"></div>
                         </form>
@@ -92,6 +97,16 @@
                                         </div>
                                         <div class="clear"></div>
                                 </div>
+                            {% elseif is_granted('ROLE_SUPER_USER') %}
+                                <div class="infos-client_entity" id="elementLine">
+                                        <div class="client_entity entity colx6"><div class="margin"><strong>Entité</strong><br /><a href="{{ path('doplus_paratronic_admin_edit_client', {'id': client.id}) }}"><strong>{{ client.raisonSociale }}</strong></a></div></div>
+                                        <div class="client_entity code-postal colx6"><div class="margin">Code postal<br />{% if client.cp %}<strong>{{ client.cp }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx6"><div class="margin">Ville<br />{% if client.ville %}<strong>{{ client.ville }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity nb-users colx6"><div class="margin">Utilisateurs<br /><a href="{{ path('doplus_paratronic_admin_user_menu', {'id': client.id}) }}"><strong>{{ client.nbUtilisateurs }}</strong></a></div></div>
+                                        <div class="client_entity nb-stations colx6"><div class="margin">Stations<br /><a href="{{ path('doplus_paratronic_admin_station_menu', {'id': client.id}) }}"><strong>{{ client.nbStations }}</strong></a></div></div>
+                                        <div class="client_entity nb-stations colx6"><div class="margin">Paramètres<br /><a href="{{ path('doplus_paratronic_parametre_menu', {'id': client.id}) }}"><strong>Editer</strong></a></div></div>
+                                        <div class="clear"></div>
+                                </div>
                             {% else %}
                                 <div class="infos-client_entity" id="elementLine">
                                         <div class="client_entity entity colx5"><div class="margin"><strong>Entité</strong><br /><strong>{{ client.raisonSociale }}</strong></div></div>
@@ -117,11 +132,14 @@
                                                     <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_home_index') }}';">
                                                 </div>
                                         </div>
+                                        {% if is_granted("ROLE_SUPER_USER") %}
+                                            {% if is_granted("ROLE_ADMIN") %}
                                         <div class="colx4">
                                                 <div class="margin">
                                                     <input type="button" value="Ajout client" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_client') }}';">
                                                 </div>
                                         </div>
+                                             {% endif %}
                                         <div class="colx4">
                                                 <div class="margin">
                                                     <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
@@ -132,14 +150,18 @@
                                                     <input type="button" value="Ajout station" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_station') }}';">
                                                 </div>
                                         </div>
+                                        {% endif %}
                                 </div>
+                                {% if is_granted("ROLE_ADMIN") %}
                                 <div class="sep colx3">&nbsp;</div>
                                                                 <div class="colx6">
                                         <div class="margin">
                                                 <input type="button" value="Suppr. sélection" onclick="javascript:supprSelection('client');">
                                         </div>
                                 </div>
+                                {% endif %}
                                 <div class="clear"></div>
+                                
                         </form>
                 </div>			
                 <!-- / CLIENTS EDIT 2 -->

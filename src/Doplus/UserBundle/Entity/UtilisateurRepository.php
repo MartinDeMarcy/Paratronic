@@ -19,4 +19,14 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
                 ;
         return $qb->getQuery()->getResult();
     }
+    
+    public function findUsersForAlerte($id) {
+        $qb = $this->createQueryBuilder('u')
+                    ->leftJoin('u.client', 'uc')
+                    ->addSelect('uc')
+                    ->where("uc.id = $id")
+                    ->andWhere('u.etat = 1')
+                ;
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -10,4 +10,17 @@ namespace Doplus\ParatronicBundle\Repository;
  */
 class MesureRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findMesureTask($id) {
+        $qb = $this->createQueryBuilder('m')
+                    ->leftJoin('m.capteur', 'mc')
+                    ->leftJoin('mc.station', 'ms')
+                    ->leftJoin('ms.client', 'mcli')
+                    ->addSelect('mc')
+                    ->addSelect('ms')
+                    ->addSelect('mcli')
+                    ->where("m.id = $id")
+                    ->andWhere('mcli.etat = 1')
+                ;
+        return $qb->getQuery()->getSingleResult();
+    }
 }

@@ -106,6 +106,16 @@ doplus_paratronic_delete_capteur:
     path:    /capteur/delete/{id}
     defaults: { _controller: DoplusParatronicBundle:Capteur:deleteCapteur }
     
+#alerte Controller
+doplus_paratronic_alerte_check:
+    path:    /alerte/check
+    defaults: { _controller: DoplusParatronicBundle:Alerte:check }
+    
+#mesure Controller
+doplus_paratronic_mesure_add:
+    path:    /mesure/add
+    defaults: { _controller: DoplusParatronicBundle:Mesure:addMesure }
+
 # test
 doplus_paratronic_test:
     path:    /test

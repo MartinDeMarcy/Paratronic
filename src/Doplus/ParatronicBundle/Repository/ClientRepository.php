@@ -32,8 +32,16 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
     
-    public function ClientMenu() {
+    public function ClientMenuAdmin() {
         $qb = $this->createQueryBuilder('c')
+                    ->orderBy('c.raisonSociale')
+                ;
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function ClientMenuUser($id) {
+        $qb = $this->createQueryBuilder('c')
+                    ->where("c.id = $id")
                     ->orderBy('c.raisonSociale')
                 ;
         return $qb->getQuery()->getResult();

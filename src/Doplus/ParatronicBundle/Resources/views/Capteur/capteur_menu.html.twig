@@ -11,14 +11,14 @@
                 <div id="clients-edit-form1" class="clients-edit-form">
                         <form action="" method="post" accept-charset="UTF-8">
                                 <div class="colx2">
-                                        <div class="colx3">
+                                    <div class="colx3">
                                                 <div class="margin">
-                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_station_menu', {'id': station.client.id}) }}';">
+                                                    <input type="button" value="Ajout capteur" onclick="window.location.href='{{ path('doplus_paratronic_ajout_capteur', {'id': station.id}) }}';">
                                                 </div>
                                         </div>
                                         <div class="colx3">
                                                 <div class="margin">
-                                                    <input type="button" value="Ajout capteur" onclick="window.location.href='{{ path('doplus_paratronic_ajout_capteur', {'id': station.id}) }}';">
+                                                    <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_station_menu', {'id': station.client.id}) }}';">
                                                 </div>
                                         </div>
                                 </div>
@@ -29,25 +29,37 @@
 
                 <!-- CLIENT INFOS USERS -->
                 {% for capteur in capteurs %}
-                    <div id="liste-clients-infos">
+                    {% if is_granted("ROLE_SUPER_USER") %}
+                        <div id="liste-clients-infos">
+                                <div class="infos-client_entity" id="elementLine42">
+                                        <div class="client_entity entity colx6"><div class="margin"><strong>Capteur</strong><br /><a href="{{ path('doplus_paratronic_edit_capteur', {'id': capteur.id}) }}"><strong>{{ capteur.nom }}</strong></a></div></div>
+                                        <div class="client_entity colx6"><div class="margin">Unité<br />{% if capteur.unite.valeur %}<strong>{{ capteur.unite.valeur }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx6"><div class="margin">Seuil pré-alerte<br />{% if capteur.seuilPreAlerte %}<strong>{{ capteur.seuilPreAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx6"><div class="margin">Seuil d'alerte<br />{% if capteur.seuilAlerte %}<strong>{{ capteur.seuilAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx6"><div class="margin"><a href="{{ path('doplus_paratronic_mesure_add') }}">Simuler une mesure&nbsp;<br /></a></div></div>
+                                        <div class="client_entity delete colx6">
+                                                <div class="margin">
+                                                        <a href="{{ path('doplus_paratronic_delete_capteur', {'id': capteur.id}) }}" onclick="javascript:supprLine('capteur','42');"><strong>Supprimer</strong></a>
+                                                        <form action="" method="post" accept-charset="UTF-8">
+                                                                <!-- jquery ui -->
+                                                                <input type="checkbox" id="entity-suppr42" class="button-jqui checkSuppr" value="42"><label for="entity-suppr42">&nbsp;</label>
+                                                        </form>
+                                                </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                </div>
+                        </div>
+                    {% else %}
+                        <div id="liste-clients-infos">
                             <div class="infos-client_entity" id="elementLine42">
-                                    <div class="client_entity entity colx5"><div class="margin"><strong>Capteur</strong><br /><a href="{{ path('doplus_paratronic_edit_capteur', {'id': capteur.id}) }}"><strong>{{ capteur.nom }}</strong></a></div></div>
-                                    <div class="client_entity colx5"><div class="margin">Unité<br />{% if capteur.unite.valeur %}<strong>{{ capteur.unite.valeur }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                    <div class="client_entity ville colx5"><div class="margin">Seuil pré-alerte<br />{% if capteur.seuilPreAlerte %}<strong>{{ capteur.seuilPreAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                    <div class="client_entity ville colx5"><div class="margin">Seuil d'alerte<br />{% if capteur.seuilAlerte %}<strong>{{ capteur.seuilAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                    <div class="client_entity delete colx5">
-                                            <div class="margin">
-                                                    <a href="{{ path('doplus_paratronic_delete_capteur', {'id': capteur.id}) }}" onclick="javascript:supprLine('capteur','42');"><strong>Supprimer</strong></a>
-                                                    <form action="" method="post" accept-charset="UTF-8">
-                                                            <!-- jquery ui -->
-                                                            <input type="checkbox" id="entity-suppr42" class="button-jqui checkSuppr" value="42"><label for="entity-suppr42">&nbsp;</label>
-                                                    </form>
-                                            </div>
-                                    </div>
-                                    <div class="clear"></div>
+                                <div class="client_entity entity colx4"><div class="margin"><strong>Capteur</strong><br /><strong>{{ capteur.nom }}</strong></div></div>
+                                    <div class="client_entity colx4"><div class="margin">Unité<br />{% if capteur.unite.valeur %}<strong>{{ capteur.unite.valeur }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                    <div class="client_entity ville colx4"><div class="margin">Seuil pré-alerte<br />{% if capteur.seuilPreAlerte %}<strong>{{ capteur.seuilPreAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                    <div class="client_entity ville colx4"><div class="margin">Seuil d'alerte<br />{% if capteur.seuilAlerte %}<strong>{{ capteur.seuilAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
                                     <div class="clear"></div>
                             </div>
                     </div>
+                    {% endif %}
                 {% endfor %}
                 <!-- / CLIENT INFOS USERS -->
 
@@ -59,11 +71,6 @@
                                                 <div class="margin">
                                                     <input type="button" value="Retour" onclick="window.location.href='{{ path('doplus_paratronic_admin_station_menu', {'id': station.client.id}) }}';">
                                                 </div>
-                                        </div>
-                                        <div class="colx3">
-                                            <div class="margin">
-                                                <input type="button" value="Ajout capteur" onclick="window.location.href='{{ path('doplus_paratronic_ajout_capteur', {'id': station.id}) }}';">
-                                            </div>
                                         </div>
                                 </div>
                                 <div class="sep colx3">&nbsp;</div>
