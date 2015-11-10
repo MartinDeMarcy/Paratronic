@@ -2,8 +2,6 @@
 
 namespace Doplus\ParatronicBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Doplus\ParatronicBundle\Entity\AlerteHistorique;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AlerteController extends Controller

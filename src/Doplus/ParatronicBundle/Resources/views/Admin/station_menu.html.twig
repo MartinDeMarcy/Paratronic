@@ -1,6 +1,6 @@
 {% extends "DoplusParatronicBundle::layout.html.twig" %}
 
-{% block title %} Accueil |{{ parent() }} {% endblock %}
+{% block title %} Admin Stations |{{ parent() }} {% endblock %}
 {% block content %}
      <!-- / CLIENTS INFOS -->
         <div id="clients-infos">
@@ -19,7 +19,7 @@
                                         {% if is_granted("ROLE_SUPER_USER") %}
                                         <div class="colx3">
                                                 <div class="margin">
-                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
                                                 </div>
                                         </div>
                                         <div class="colx3">
@@ -79,7 +79,7 @@
                                         {% if is_granted("ROLE_SUPER_USER") %}
                                         <div class="colx3">
                                                 <div class="margin">
-                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_paratronic_admin_ajout_user') }}';">
+                                                    <input type="button" value="Ajout utilisateur" onclick="window.location.href='{{ path('doplus_user_registration') }}';">
                                                 </div>
                                         </div>
                                         <div class="colx3">

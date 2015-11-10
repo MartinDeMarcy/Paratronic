@@ -105,12 +105,4 @@ class MesureController extends Controller
         $em->flush();
         return $this->redirect($this->generateUrl('doplus_paratronic_admin_menu'));
     }
-    
-    public function checkMesureAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $alertes = $em->getRepository('DoplusParatronicBundle:Alerte')->findAll();
-        var_dump($alertes);
-        return new Response;
-    }
 }
