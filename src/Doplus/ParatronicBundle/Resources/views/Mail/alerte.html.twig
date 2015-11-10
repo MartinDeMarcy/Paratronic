@@ -9,8 +9,10 @@
     Alerte !<br><br>
     
     Bonjour {{ user.nom }} {{ user.prenom }},<br>
-    Alerte : La mesure du capteur '{{ mesure.capteur.nom }}' a dépassé le seuil d'alerte de {{ mesure.capteur.seuilAlerte }} {{ mesure.capteur.unite.valeur }}.<br><br>
-    Paratronic Superviseur
+    Alerte : La mesure du capteur '{{ mesure.capteur.nom }}' a dépassé le seuil d'alerte de {{ mesure.capteur.seuilAlerte }} {{ mesure.capteur.unite.valeur }}.<br>
+    Le capteur indique {{ mesure.valeur }} {{ mesure.capteur.unite.valeur }}.<br>
+    Pour s'acquitter de l'alarme cliquer sur ce lien : <a href="localhost{{ path('doplus_paratronic_alerte_acquittement', {'id': alerte.id}) }}">S'acquitter de l'alerte du capteur {{ mesure.capteur.nom }}</a>
+    <br><br>Paratronic Superviseur
 </p>
     {% endblock %}
 </body>

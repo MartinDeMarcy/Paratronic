@@ -261,7 +261,8 @@ class AdminController extends Controller
         }
         return $this->render('DoplusParatronicBundle:Admin:ajout_station.html.twig', array(
             'formStation' => $formStation->createView(),
-            'station' => $station
+            'station' => $station,
+            'error' => NULL
         ));
     }
     

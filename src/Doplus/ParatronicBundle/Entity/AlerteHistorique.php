@@ -22,8 +22,7 @@ class AlerteHistorique
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Doplus\ParatronicBundle\Entity\Alerte", cascade={"persist"})
-     * @ORM\JoinColumn(name="alerte_id", referencedColumnName="id")
+     * @ORM\Column(name="alerte_id", type="integer")
      */
     private $alerte;
 
@@ -34,7 +33,7 @@ class AlerteHistorique
     private $mesure;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Doplus\ParatronicBundle\Entity\Utilisateur", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Doplus\UserBundle\Entity\Utilisateur", cascade={"persist"})
      * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
      */
     private $utilisateur;
@@ -42,14 +41,14 @@ class AlerteHistorique
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_alerte", type="date")
+     * @ORM\Column(name="date_alerte", type="datetime")
      */
     private $dateAlerte;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_acquittement", type="date")
+     * @ORM\Column(name="date_acquittement", type="datetime")
      */
     private $dateAcquittement;
 
@@ -81,7 +80,7 @@ class AlerteHistorique
     private $boolAlerteSms;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Doplus\ParatronicBundle\Entity\Utilisateur", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Doplus\UserBundle\Entity\Utilisateur", cascade={"persist"})
      * @ORM\JoinColumn(name="utilisateur_id_acquittement", referencedColumnName="id")
      */
     private $utilisateurAcquittement;
@@ -255,7 +254,7 @@ class AlerteHistorique
      *
      * @return AlerteHistorique
      */
-    public function setAlerte(\Doplus\ParatronicBundle\Entity\Alerte $alerte = null)
+    public function setAlerte($alerte)
     {
         $this->alerte = $alerte;
 
@@ -299,11 +298,11 @@ class AlerteHistorique
     /**
      * Set utilisateur
      *
-     * @param \Doplus\ParatronicBundle\Entity\Utilisateur $utilisateur
+     * @param \Doplus\UserBundle\Entity\Utilisateur $utilisateur
      *
      * @return AlerteHistorique
      */
-    public function setUtilisateur(\Doplus\ParatronicBundle\Entity\Utilisateur $utilisateur = null)
+    public function setUtilisateur(\Doplus\UserBundle\Entity\Utilisateur $utilisateur = null)
     {
         $this->utilisateur = $utilisateur;
 
@@ -347,11 +346,11 @@ class AlerteHistorique
     /**
      * Set utilisateurAcquittement
      *
-     * @param \Doplus\ParatronicBundle\Entity\Utilisateur $utilisateurAcquittement
+     * @param \Doplus\UserBundle\Entity\Utilisateur $utilisateurAcquittement
      *
      * @return AlerteHistorique
      */
-    public function setUtilisateurAcquittement(\Doplus\ParatronicBundle\Entity\Utilisateur $utilisateurAcquittement = null)
+    public function setUtilisateurAcquittement(\Doplus\UserBundle\Entity\Utilisateur $utilisateurAcquittement = null)
     {
         $this->utilisateurAcquittement = $utilisateurAcquittement;
 

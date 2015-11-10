@@ -10,6 +10,14 @@ namespace Doplus\ParatronicBundle\Repository;
  */
 class MesureRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllWithLimit($nb) {
+        $qb = $this->createQueryBuilder('m')
+                    ->orderBy('m.dateMesure', 'DESC')
+                    ->setMaxResults($nb)
+                ;
+        return $qb->getQuery()->getResult();
+    }
+    
     public function findMesureTask($id) {
         $qb = $this->createQueryBuilder('m')
                     ->leftJoin('m.capteur', 'mc')
@@ -22,5 +30,18 @@ class MesureRepository extends \Doctrine\ORM\EntityRepository
                     ->andWhere('mcli.etat = 1')
                 ;
         return $qb->getQuery()->getSingleResult();
+    }
+    
+    public function findByStationId($id, $nb) {
+        $qb = $this->createQueryBuilder('m')
+                    ->leftJoin('m.capteur', 'mc')
+                    ->leftJoin('mc.station', 'ms')
+                    ->addSelect('mc')
+                    ->addSelect('ms')
+                    ->where("ms.id = $id")
+                    ->orderBy('m.dateMesure', 'DESC')
+                    ->setMaxResults($nb)
+                ;
+        return $qb->getQuery()->getResult();
     }
 }

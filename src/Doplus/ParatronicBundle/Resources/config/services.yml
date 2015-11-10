@@ -5,3 +5,8 @@ services:
     doplus_paratronic.doplus_mailer:
         class: Doplus\ParatronicBundle\Service\DoplusMailer
         arguments: ["@mailer", "@templating"]
+        
+    doplus_paratronic.alerte_archiver:
+        class: Doplus\ParatronicBundle\Service\DoplusAlerteArchiver
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }

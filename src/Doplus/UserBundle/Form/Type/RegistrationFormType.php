@@ -32,8 +32,11 @@ class RegistrationFormType extends BaseType
                     'expanded' => true,
                     'preferred_choices' => array(0),
                 ))
-                ->add('niveauAlerte', 'text', array(
-                    'required' => false,
+                ->add('niveauAlerte', 'choice', array(
+                    'choices' => array(
+                        '1' => 'Alerte',
+                        '2' => 'Pre-alerte + Alerte'
+                    ),
                     ))
                 ->add('username', 'text')
                 ->add('password', 'password', array(

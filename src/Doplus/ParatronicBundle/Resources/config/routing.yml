@@ -111,6 +111,10 @@ doplus_paratronic_alerte_check:
     path:    /alerte/check
     defaults: { _controller: DoplusParatronicBundle:Alerte:check }
     
+doplus_paratronic_alerte_acquittement:
+    path:    /alerte/acquittement/{id}
+    defaults: { _controller: DoplusParatronicBundle:Alerte:archive }
+    
 #mesure Controller
 doplus_paratronic_mesure_add:
     path:    /mesure/add

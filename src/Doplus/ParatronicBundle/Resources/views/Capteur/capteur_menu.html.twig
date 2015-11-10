@@ -32,12 +32,11 @@
                     {% if is_granted("ROLE_SUPER_USER") %}
                         <div id="liste-clients-infos">
                                 <div class="infos-client_entity" id="elementLine42">
-                                        <div class="client_entity entity colx6"><div class="margin"><strong>Capteur</strong><br /><a href="{{ path('doplus_paratronic_edit_capteur', {'id': capteur.id}) }}"><strong>{{ capteur.nom }}</strong></a></div></div>
-                                        <div class="client_entity colx6"><div class="margin">Unité<br />{% if capteur.unite.valeur %}<strong>{{ capteur.unite.valeur }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                        <div class="client_entity ville colx6"><div class="margin">Seuil pré-alerte<br />{% if capteur.seuilPreAlerte %}<strong>{{ capteur.seuilPreAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                        <div class="client_entity ville colx6"><div class="margin">Seuil d'alerte<br />{% if capteur.seuilAlerte %}<strong>{{ capteur.seuilAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
-                                        <div class="client_entity ville colx6"><div class="margin"><a href="{{ path('doplus_paratronic_mesure_add') }}">Simuler une mesure&nbsp;<br /></a></div></div>
-                                        <div class="client_entity delete colx6">
+                                        <div class="client_entity entity colx5"><div class="margin"><strong>Capteur</strong><br /><a href="{{ path('doplus_paratronic_edit_capteur', {'id': capteur.id}) }}"><strong>{{ capteur.nom }}</strong></a></div></div>
+                                        <div class="client_entity colx5"><div class="margin">Unité<br />{% if capteur.unite.valeur %}<strong>{{ capteur.unite.valeur }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx5"><div class="margin">Seuil pré-alerte<br />{% if capteur.seuilPreAlerte %}<strong>{{ capteur.seuilPreAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity ville colx5"><div class="margin">Seuil d'alerte<br />{% if capteur.seuilAlerte %}<strong>{{ capteur.seuilAlerte }}</strong>{% else %}<strong>&nbsp;</strong>{% endif %}</div></div>
+                                        <div class="client_entity delete colx5">
                                                 <div class="margin">
                                                         <a href="{{ path('doplus_paratronic_delete_capteur', {'id': capteur.id}) }}" onclick="javascript:supprLine('capteur','42');"><strong>Supprimer</strong></a>
                                                         <form action="" method="post" accept-charset="UTF-8">

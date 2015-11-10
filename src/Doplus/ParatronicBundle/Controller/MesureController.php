@@ -3,21 +3,25 @@
 namespace Doplus\ParatronicBundle\Controller;
 
 use Doplus\ParatronicBundle\Entity\Mesure;
+use Doplus\ParatronicBundle\Entity\Alerte;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MesureController extends Controller
 {
     public function addMesureAction()
     {
-        $id = 6;
-        $now = new \DateTime();
+        $now = new \Datetime();
         $em = $this->getDoctrine()->getManager();
         $capteurs = $em->getRepository('DoplusParatronicBundle:Capteur')->findAll();
-        $mesuresArhchive = $em->getRepository('DoplusParatronicBundle:Mesure')->findAll();
+        $nbCapteur = count($capteurs);
+        $alerteArhchive = $em->getRepository('DoplusParatronicBundle:Alerte')->findAll();
         //archivage des mesures precedantes
-        foreach ($mesuresArhchive as $mesure) {
-            $mesure->setCapteur(NULL);
-            $em->remove($mesure);
+        foreach ($alerteArhchive as $alerte) {
+            $alerte->setCapteur(NULL);
+            $alerte->setMesure(NULL);
+            $alerte->setUtilisateur(NULL);
+            $em->remove($alerte);
         }
         $em->flush();
         //generation des nouvelle mesures donc on nettoie la base de donee -> mesure
@@ -29,40 +33,84 @@ class MesureController extends Controller
             $mesure->setValeur(rand(5, 200));
             $em->persist($mesure);
         }
+        
         $em->flush();
-        $mesures = $em->getRepository('DoplusParatronicBundle:Mesure')->findAll();
+        $mesures = $em->getRepository('DoplusParatronicBundle:Mesure')->findAllWithLimit($nbCapteur);
+        //var_dump($mesures);exit();
         foreach ($mesures as $mesure) {
             if ($mesure->getValeur() > $mesure->getCapteur()->getSeuilAlerte()) {
-                echo "Pour la mesure :";
-                var_dump($mesure);
                 $mesureValable = $em->getRepository('DoplusParatronicBundle:Mesure')->findMesureTask($mesure->getId());
                 if ($mesureValable != NULL) {
                     $clientId = $mesureValable->getCapteur()->getStation()->getClient()->getId();
                     $users = $em->getRepository('DoplusUserBundle:Utilisateur')->findUsersForAlerte($clientId);
+//                    var_dump($users);exit();
                     if ($users != NULL) {
-                        echo "Ca depasse et il ya des users actif :";
                         foreach ($users as $user) {
-                            if ($user->getAlerte() == 1) {
-                                $this->get('doplus_paratronic.doplus_mailer')->sendAlerte($user, $mesure);
-                                echo "<br>Cette user a les alertes actives";
+                            $alerte = new Alerte();
+                            $alerte->setMesure($mesureValable);
+                            $alerte->setUtilisateur($user);
+                            $alerte->setCapteur($mesureValable->getCapteur());
+                            $alerte->setDateAlerte($now);
+                            $alerte->setEtat(1);
+                            $alerte->setNiveauAlerte(1);
+                            $alerte->setBoolAlerteMail(true);
+                            if ($user->getTelephone() != NULL) {
+                                $alerte->setBoolAlerteSms(true);
                             }
                             else {
-                                echo "Cette user a les alertes inactives";
+                                $alerte->setBoolAlerteSms(false);
                             }
-                            var_dump($user);
+                            $em->persist($alerte);
+                            $em->flush();
+                            if ($user->getAlerte() == 1) {
+                                $this->get('doplus_paratronic.doplus_mailer')->sendAlerte($user, $mesure, $alerte);
+                            }
+                            
                         }
-                    }
-                    else {
-                        echo "Ca depasse mais pas d'utilisateurs actifs";
                     }
                 }
             }
-            else {
-                echo "Pour la mesure :";
-                var_dump($mesure);
-                echo "Ca depasse pas<br>";
+            if ($mesure->getValeur() > $mesure->getCapteur()->getSeuilPreAlerte()) {
+                $mesureValable = $em->getRepository('DoplusParatronicBundle:Mesure')->findMesureTask($mesure->getId());
+                if ($mesureValable != NULL) {
+                    $clientId = $mesureValable->getCapteur()->getStation()->getClient()->getId();
+                    $users = $em->getRepository('DoplusUserBundle:Utilisateur')->findUsersForPreAlerte($clientId);
+                    if ($users != NULL) {
+                        foreach ($users as $user) {
+                            $alerte = new Alerte();
+                            $alerte->setMesure($mesureValable);
+                            $alerte->setUtilisateur($user);
+                            $alerte->setCapteur($mesureValable->getCapteur());
+                            $alerte->setDateAlerte($now);
+                            $alerte->setEtat(1);
+                            $alerte->setNiveauAlerte(2);
+                            $alerte->setBoolAlerteMail(true);
+                            if ($user->getTelephone() != NULL) {
+                                $alerte->setBoolAlerteSms(true);
+                            }
+                            else {
+                                $alerte->setBoolAlerteSms(false);
+                            }
+                            $em->persist($alerte);
+                            $em->flush();
+                            if ($user->getAlerte() == 1) {
+                                $this->get('doplus_paratronic.doplus_mailer')->sendAlerte($user, $mesure, $alerte);
+                            }
+                            
+                        }
+                    }
+                }
             }
         }
-        return $this->redirect($this->generateUrl('doplus_paratronic_capteur_menu', array('id' => $id)));
+        $em->flush();
+        return $this->redirect($this->generateUrl('doplus_paratronic_admin_menu'));
+    }
+    
+    public function checkMesureAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $alertes = $em->getRepository('DoplusParatronicBundle:Alerte')->findAll();
+        var_dump($alertes);
+        return new Response;
     }
 }

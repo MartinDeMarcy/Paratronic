@@ -28,7 +28,7 @@ class Alerte
     private $mesure;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Doplus\ParatronicBundle\Entity\Utilisateur", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Doplus\UserBundle\Entity\Utilisateur", cascade={"persist"})
      * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
      */
     private $utilisateur;
@@ -36,21 +36,21 @@ class Alerte
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_alerte", type="date")
+     * @ORM\Column(name="date_alerte", type="datetime", nullable=true)
      */
     private $dateAlerte;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_acquittement", type="date")
+     * @ORM\Column(name="date_acquittement", type="datetime", nullable=true)
      */
     private $dateAcquittement;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="etat", type="integer")
+     * @ORM\Column(name="etat", type="integer", nullable=true)
      */
     private $etat;
 
@@ -63,19 +63,19 @@ class Alerte
     /**
      * @var integer
      *
-     * @ORM\Column(name="bool_alerte_mail", type="integer")
+     * @ORM\Column(name="bool_alerte_mail", type="integer", nullable=true)
      */
     private $boolAlerteMail;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="bool_alerte_sms", type="integer")
+     * @ORM\Column(name="bool_alerte_sms", type="integer", nullable=true)
      */
     private $boolAlerteSms;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Doplus\ParatronicBundle\Entity\Utilisateur", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Doplus\UserBundle\Entity\Utilisateur", cascade={"persist"})
      * @ORM\JoinColumn(name="utilisateur_id_acquittement", referencedColumnName="id")
      */
     private $utilisateurAcquittement;
@@ -83,7 +83,7 @@ class Alerte
     /**
      * @var integer
      *
-     * @ORM\Column(name="niveau_alerte", type="integer")
+     * @ORM\Column(name="niveau_alerte", type="integer", nullable=true)
      */
     private $niveauAlerte;
 
@@ -273,7 +273,7 @@ class Alerte
      *
      * @return Alerte
      */
-    public function setUtilisateur(\Doplus\ParatronicBundle\Entity\Utilisateur $utilisateur = null)
+    public function setUtilisateur(\Doplus\UserBundle\Entity\Utilisateur $utilisateur = null)
     {
         $this->utilisateur = $utilisateur;
 
@@ -321,7 +321,7 @@ class Alerte
      *
      * @return Alerte
      */
-    public function setUtilisateurAcquittement(\Doplus\ParatronicBundle\Entity\Utilisateur $utilisateurAcquittement = null)
+    public function setUtilisateurAcquittement(\Doplus\UserBundle\Entity\Utilisateur $utilisateurAcquittement = null)
     {
         $this->utilisateurAcquittement = $utilisateurAcquittement;
 

@@ -22,7 +22,7 @@ class Mesure
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Doplus\ParatronicBundle\Entity\Capteur", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Doplus\ParatronicBundle\Entity\Capteur", cascade={"persist"})
      * @ORM\JoinColumn(name="capteur_id", referencedColumnName="id")
      */
     private $capteur;
@@ -30,7 +30,7 @@ class Mesure
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_mesure", type="date")
+     * @ORM\Column(name="date_mesure", type="datetime")
      */
     private $dateMesure;
 
@@ -54,7 +54,6 @@ class Mesure
      * @ORM\Column(name="horodatage", type="bigint", nullable=true))
      */
     private $horodatage;
-
 
     /**
      * Get id

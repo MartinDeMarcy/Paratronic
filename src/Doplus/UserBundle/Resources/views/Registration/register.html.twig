@@ -93,7 +93,7 @@
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(form.niveauAlerte, "Ordre alerte") }}
-                                        {{ form_widget(form.niveauAlerte, {'id': 'niveauAlerte'}) }}
+                                        {{ form_widget(form.niveauAlerte, {'id': 'niveauAlerte', 'attr': {'class': 'selectmenu-jqui'}}) }}
                                         {{ form_errors(form.niveauAlerte) }}
                                     </div>
                             </div>
@@ -108,8 +108,6 @@
                                     </div>
                             </div>
                             <div class="clear"></div>
-                            {% if tmp != "ajout" %}
-                            {% else %}
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(form.plainPassword.first, "Mot de passe *") }}
@@ -124,7 +122,6 @@
                                         {{ form_errors(form.plainPassword.second) }}
                                     </div>
                             </div>
-                            {% endif %}
                             <div class="clear"></div>
                             <div class="colx2">
                                     <div class="margin">

@@ -26,6 +26,19 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
                     ->addSelect('uc')
                     ->where("uc.id = $id")
                     ->andWhere('u.etat = 1')
+                    ->andWhere('u.alerte = 1')
+                ;
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function findUsersForPreAlerte($id) {
+        $qb = $this->createQueryBuilder('u')
+                    ->leftJoin('u.client', 'uc')
+                    ->addSelect('uc')
+                    ->where("uc.id = $id")
+                    ->andWhere('u.etat = 1')
+                    ->andWhere('u.alerte = 1')
+                    ->andWhere('u.niveauAlerte = 2')
                 ;
         return $qb->getQuery()->getResult();
     }
