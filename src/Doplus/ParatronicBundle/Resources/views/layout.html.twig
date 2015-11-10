@@ -61,7 +61,7 @@
 					<div class="user-menu-infos colx3">
                                             <div class="c-user-nom-societe">
 						<div class="user-nom"> {{ app.user.nom }} {{ app.user.prenom }}{% if is_granted("ROLE_ADMIN") %} | Admin {% endif %}</div>
-						<div class="user-societe">{{ app.user.client.raisonSociale }}</div>
+						<div class="user-societe">{% if app.user.client %}{{ app.user.client.raisonSociale }}{% endif %}</div>
                                             </div>
 					</div>
 					<div class="user-menu-link col2-3">

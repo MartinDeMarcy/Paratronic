@@ -9,7 +9,6 @@ use Doplus\ParatronicBundle\Entity\ParametreAbonnement;
 use Doplus\ParatronicBundle\Entity\ParametreAlerte;
 use Doplus\ParatronicBundle\Entity\ParametreLimitation;
 use Doplus\ParatronicBundle\Form\ClientType;
-use Doplus\ParatronicBundle\Entity\Utilisateur;
 use Doplus\ParatronicBundle\Form\Type\RegistrationFormType;
 use Doplus\ParatronicBundle\Entity\Station;
 use Doplus\ParatronicBundle\Form\StationType;
@@ -132,27 +131,6 @@ class AdminController extends Controller
         $em->remove($client);
         $em->flush();
         return $this->redirect($this->generateUrl('doplus_paratronic_admin_menu'));
-    }
-    
-    public function ajoutUserAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user = new Utilisateur();
-        $formUser = $this->createForm(new RegistrationFormType(), $user);
-        $formUser->handleRequest($request);
-        if ($formUser->isValid()) {
-            $user->getClient()->addUtilisateur();
-            $user->upload();
-            $em->persist($user);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.');
-            return $this->redirect($this->generateUrl('doplus_paratronic_admin_user_menu', array('id' => $user->getClient()->getId())));
-        }
-        
-        return $this->render('DoplusParatronicBundle:Admin:ajout_user.html.twig', array(
-            'formUser' => $formUser->createView(),
-            'user' => $user
-        ));
     }
     
     public function editUserAction($id, Request $request)
