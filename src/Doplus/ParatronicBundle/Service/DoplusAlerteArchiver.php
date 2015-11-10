@@ -27,7 +27,7 @@ class DoplusAlerteArchiver
             $histo->setBoolAlerteSms($entity->getBoolAlerteSms());
             $histo->setDateAcquittement($now);
             $histo->setNiveauAlerte($entity->getNiveauAlerte());
-            $em->persist($histo);
+            $em->persist($entity);
             $em->flush();
         }
     }

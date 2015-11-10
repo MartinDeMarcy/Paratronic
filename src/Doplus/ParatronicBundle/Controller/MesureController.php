@@ -18,9 +18,6 @@ class MesureController extends Controller
         $alerteArhchive = $em->getRepository('DoplusParatronicBundle:Alerte')->findAll();
         //archivage des mesures precedantes
         foreach ($alerteArhchive as $alerte) {
-            $alerte->setCapteur(NULL);
-            $alerte->setMesure(NULL);
-            $alerte->setUtilisateur(NULL);
             $em->remove($alerte);
         }
         $em->flush();
@@ -62,9 +59,7 @@ class MesureController extends Controller
                             }
                             $em->persist($alerte);
                             $em->flush();
-                            if ($user->getAlerte() == 1) {
-                                $this->get('doplus_paratronic.doplus_mailer')->sendAlerte($user, $mesure, $alerte);
-                            }
+                            $this->get('doplus_paratronic.doplus_mailer')->sendAlerte($user, $mesure, $alerte);
                             
                         }
                     }
@@ -93,9 +88,7 @@ class MesureController extends Controller
                             }
                             $em->persist($alerte);
                             $em->flush();
-                            if ($user->getAlerte() == 1) {
-                                $this->get('doplus_paratronic.doplus_mailer')->sendAlerte($user, $mesure, $alerte);
-                            }
+                            $this->get('doplus_paratronic.doplus_mailer')->sendAlerte($user, $mesure, $alerte);
                             
                         }
                     }

@@ -3,6 +3,7 @@
 namespace Doplus\ParatronicBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class StationController extends Controller
@@ -22,6 +23,28 @@ class StationController extends Controller
             'mesures' => $mesures,
             'alertes1' => $alertes1,
             'alertes2' => $alertes2
+        ));
+    }
+    
+    public function exportStationCSV() {
+        $em = $this->getDoctrine()->getEntityManager();
+       
+        $iterableResult = $em->getRepository('DoplusParatronicBundle:Mesure')->createQueryBuilder('m')->getQuery()->iterate();
+        $handle = fopen('php://memory', 'r+');
+        $header = array();
+
+        while (false !== ($row = $iterableResult->next())) {
+            fputcsv($handle, $row[0]);
+            $em->detach($row[0]);
+        }
+
+        rewind($handle);
+        $content = stream_get_contents($handle);
+        fclose($handle);
+        
+        return new Response($content, 200, array(
+            'Content-Type' => 'application/force-download',
+            'Content-Disposition' => 'attachment; filename="export.csv"'
         ));
     }
 }

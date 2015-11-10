@@ -9,7 +9,6 @@ use Doplus\ParatronicBundle\Entity\ParametreAbonnement;
 use Doplus\ParatronicBundle\Entity\ParametreAlerte;
 use Doplus\ParatronicBundle\Entity\ParametreLimitation;
 use Doplus\ParatronicBundle\Form\ClientType;
-use Doplus\ParatronicBundle\Form\Type\RegistrationFormType;
 use Doplus\ParatronicBundle\Entity\Station;
 use Doplus\ParatronicBundle\Form\StationType;
 use Doplus\ParatronicBundle\Entity\Search\ClientSearch;
@@ -50,6 +49,7 @@ class AdminController extends Controller
     
     public function ajoutClientAction(Request $request)
     {
+        $tmp = 1;
         $em = $this->getDoctrine()->getManager();
         $client = new Client();
         $formClient = $this->createForm(new ClientType(), $client);
@@ -58,6 +58,7 @@ class AdminController extends Controller
             $parametreAbonnement = new ParametreAbonnement();
             $parametreAbonnement->setClient($client);
             $parametreAlerte = new ParametreAlerte();
+            $parametreAlerte->setIntervalleRelance(60);
             $parametreAlerte->setClient($client);
             $parametreLimitation = new ParametreLimitation();
             $parametreLimitation->setClient($client);
@@ -74,12 +75,14 @@ class AdminController extends Controller
         }
         return $this->render('DoplusParatronicBundle:Admin:ajout_client.html.twig', array(
             'formClient' => $formClient->createView(),
-            'client' => $client
+            'client' => $client,
+            'tmp' => $tmp
         ));
     }
     
     public function editClientAction($id, Request $request)
     {
+        $tmp = 2;
         $em = $this->getDoctrine()->getManager();
         $client = $em->getRepository('DoplusParatronicBundle:Client')->find($id);
         $formClient = $this->createForm(new ClientType(), $client);
@@ -99,7 +102,8 @@ class AdminController extends Controller
         }
         return $this->render('DoplusParatronicBundle:Admin:ajout_client.html.twig', array(
             'formClient' => $formClient->createView(),
-            'client' => $client
+            'client' => $client,
+            'tmp' => $tmp
         ));
     }
     

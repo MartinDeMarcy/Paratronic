@@ -19,6 +19,7 @@ class AlerteRepository extends \Doctrine\ORM\EntityRepository
                     ->addSelect('ast')
                     ->addSelect('au')
                     ->where("ast.id = $id")
+                    ->andWhere('au.alerte = 1')
                     ->andWhere("au.id = $user")
                     ->andWhere('a.niveauAlerte = 1')
                 ;
@@ -34,6 +35,7 @@ class AlerteRepository extends \Doctrine\ORM\EntityRepository
                     ->addSelect('ast')
                     ->addSelect('au')
                     ->where("ast.id = $id")
+                    ->andWhere('au.alerte = 1')
                     ->andWhere("au.id = $user")
                     ->andWhere('a.niveauAlerte = 2')
                 ;

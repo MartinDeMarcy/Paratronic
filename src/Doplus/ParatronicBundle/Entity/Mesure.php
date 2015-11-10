@@ -42,9 +42,9 @@ class Mesure
     private $valeur;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="archive", type="integer", nullable=true)
+     * @var string
+     * 
+     * @ORM\Column(name="archive", type="string", length=255, nullable=true))
      */
     private $archive;
 
@@ -114,30 +114,6 @@ class Mesure
     }
 
     /**
-     * Set archive
-     *
-     * @param integer $archive
-     *
-     * @return Mesure
-     */
-    public function setArchive($archive)
-    {
-        $this->archive = $archive;
-
-        return $this;
-    }
-
-    /**
-     * Get archive
-     *
-     * @return integer
-     */
-    public function getArchive()
-    {
-        return $this->archive;
-    }
-
-    /**
      * Set horodatage
      *
      * @param integer $horodatage
@@ -183,5 +159,38 @@ class Mesure
     public function getCapteur()
     {
         return $this->capteur;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->archive = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    
+
+    /**
+     * Set archive
+     *
+     * @param string $archive
+     *
+     * @return Mesure
+     */
+    public function setArchive($archive)
+    {
+        $this->archive = $archive;
+
+        return $this;
+    }
+
+    /**
+     * Get archive
+     *
+     * @return string
+     */
+    public function getArchive()
+    {
+        return $this->archive;
     }
 }

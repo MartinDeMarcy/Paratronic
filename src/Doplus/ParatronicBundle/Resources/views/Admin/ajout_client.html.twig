@@ -61,6 +61,7 @@
                             <!-- ATTENTION - toujours ajouter un clear après la photo et redémarrer l'imprication normalement -->
 
                             <div class="clear"></div>
+                            {% if tmp == 1 %}
                             <div class="colx2">
                                     <div class="margin">
                                         
@@ -69,6 +70,7 @@
                                     </div>
                             </div>
                             <div class="clear"></div>
+                            {% endif %}
                             <div class="colx2">
                                     <div class="margin">
                                         {{ form_label(formClient.adresse, "Adresse") }}

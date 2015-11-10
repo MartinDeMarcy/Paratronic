@@ -99,12 +99,12 @@
                                                     <div class="isc isc-seuil colx10"><div class="margin">Seuil alerte<br /><strong>{{ mesure.capteur.seuilAlerte }}&nbsp;</strong></div></div>
                                                     {% for alerte2 in alertes2 %}
                                                         {% if alerte2.mesure.id == mesure.id %}
-                                                            <div class="isc isc-seuil colx10"><div class="margin"><input class="btn btn-danger" type="button" value="Acquitter" onclick="window.location.href='{{ path('doplus_paratronic_alerte_acquittement', {'id': alerte2.id}) }}) }}';"><strong> Pre-alerte</strong><br /></div></div>
+                                                            <div class="isc isc-seuil colx10"><div class="margin"><input class="btn btn-danger" type="button" value="Acquisition " onclick="window.location.href='{{ path('doplus_paratronic_alerte_acquittement', {'id': alerte2.id}) }}) }}';"><strong> Pre-alerte</strong><br /></div></div>
                                                         {% endif %}
                                                     {% endfor %}
                                                     {% for alerte1 in alertes1 %}
                                                         {% if alerte1.mesure.id == mesure.id %}
-                                                            <div class="isc isc-seuil colx10"><div class="margin"><input class="btn btn-danger" type="button" value="Acquitter" onclick="window.location.href='{{ path('doplus_paratronic_alerte_acquittement', {'id': alerte1.id}) }}) }}';"><strong> Alerte</strong><br /></div></div>
+                                                            <div class="isc isc-seuil colx10"><div class="margin"><input class="btn btn-danger" type="button" value="Acquisition " onclick="window.location.href='{{ path('doplus_paratronic_alerte_acquittement', {'id': alerte1.id}) }}) }}';"><strong> Alerte</strong><br /></div></div>
                                                         {% endif %}
                                                     {% endfor %}
                                                     <div class="clear"></div>
